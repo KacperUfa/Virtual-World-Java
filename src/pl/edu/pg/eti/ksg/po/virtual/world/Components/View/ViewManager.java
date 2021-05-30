@@ -24,7 +24,7 @@ public class ViewManager {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5,10));
         for (int i = 0; i < 20; i++){
-            OrganizmButton button = new OrganizmButton("Text");
+            OrganismButton button = new OrganismButton("Text");
             panel.add(button);
         }
         panel.setBorder(BorderFactory.createEmptyBorder((size.width/10),(size.height/10),(size.width/10),(size.height/10)));
