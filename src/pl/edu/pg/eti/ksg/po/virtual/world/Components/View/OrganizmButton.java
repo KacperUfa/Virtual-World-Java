@@ -16,8 +16,6 @@ public class OrganizmButton extends JButton {
     public OrganizmButton(String text, Organizm organizm) {
         super(text);
         this.organizm = organizm;
-        this.setBackground(Color.BLACK);
-        this.setForeground(Color.RED);
     }
 
     public OrganizmButton(String text) {

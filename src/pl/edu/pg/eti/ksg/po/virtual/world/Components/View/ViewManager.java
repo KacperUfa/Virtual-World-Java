@@ -8,26 +8,23 @@ public class ViewManager {
 
     public ViewManager(String windowTitle, int sizeX, int sizeY) {
         this.frame = new JFrame(windowTitle);
-        this.frame.setSize(sizeX, sizeY);
+        this.frame.setSize(1000, 1000);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setLocationRelativeTo(null);
-        JScrollPane jsp = new JScrollPane(createPanelWithButtons());
-        this.frame.add(createPanelWithButtons(), BorderLayout.CENTER);
+        this.frame.add(createPanelWithButtons(sizeX, sizeY), BorderLayout.CENTER);
         this.frame.setVisible(true);
     }
 
-    private JPanel createPanelWithButtons() {
-        Dimension size = this.frame.getSize();
-        int avaliableField = size.width * size.height;
-        int abaliableButtons = avaliableField / 10;
+    private JPanel createPanelWithButtons(int sizeX, int sizeY) {
+        int abaliableButtons = sizeX * sizeY;
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5,10));
-        for (int i = 0; i < 20; i++){
-            OrganizmButton button = new OrganizmButton("Text");
+        panel.setLayout(new GridLayout(sizeX, sizeY));
+        for (int i = 0; i < abaliableButtons; i++){
+            OrganizmButton button = new OrganizmButton("Text " + i);
             panel.add(button);
         }
-        panel.setBorder(BorderFactory.createEmptyBorder((size.width/10),(size.height/10),(size.width/10),(size.height/10)));
+        panel.setBorder(BorderFactory.createEmptyBorder(100,100,100,100));
         return panel;
     }
 }
