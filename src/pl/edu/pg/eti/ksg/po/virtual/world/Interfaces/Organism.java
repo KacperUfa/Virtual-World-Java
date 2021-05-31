@@ -9,11 +9,11 @@ import java.awt.*;
 public abstract class Organism {
     private final int INITIATIVE;
     private final ImageIcon ORGANISM_ICON;
-    private final World WORLD;
+    private World WORLD;
 
     private int power;
     private boolean alive;
-    private Position position;
+    protected Position position;
 
     public Organism(int initiative, ImageIcon organismIcon, int power, Position position, World world) {
         this.INITIATIVE = initiative;
@@ -31,6 +31,10 @@ public abstract class Organism {
         this.alive = true;
         this.position = new Position(x, y);
         this.WORLD = world;
+    }
+
+    public void setWORLD(World WORLD) {
+        this.WORLD = WORLD;
     }
 
     public int getINITIATIVE() {
@@ -71,6 +75,7 @@ public abstract class Organism {
 
     public void Kill(){
         this.alive=false;
+        WORLD.addKilled(this);
     }
 
     abstract public void action();
