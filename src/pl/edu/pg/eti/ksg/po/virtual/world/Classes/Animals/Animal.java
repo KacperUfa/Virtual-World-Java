@@ -16,10 +16,6 @@ public abstract class Animal extends Organism {
         super(initiative, organismIcon, power, x, y, world);
     }
 
-    public void move(int x, int y) {
-        this.position.move(x, y);
-    }
-
     public Position randomMove() {
         Random random = new Random();
         int x, y;
@@ -54,9 +50,41 @@ public abstract class Animal extends Organism {
             randomMove().setY(-1);
         }
 
-       // Organism tmpOrganism = this.WORLD.
+        int xAction = actualX+move.getX();
+        int yAction = actualY+move.getY();
 
+        Organism tmpOrganism = this.WORLD.getOrganism(xAction, yAction);
 
+        if(tmpOrganism==null){
+            this.move(move.getX(), move.getY());
+        }
+        else{
+            tmpOrganism.collision(this, actualX, actualY, move);
+        }
+    }
+
+    public void collision(Organism aggressiveOrganism, int organismX,int organismY, Position move){
+        if(aggressiveOrganism.checkSpecies(this)){
+            //Breed
+            Position breedPosition = this.breedPosition();
+            if(breedPosition!=null){
+                this.newOrganism(breedPosition);
+            }
+        }
+        else{
+            //Fight
+            if(aggressiveOrganism.getPower()>=this.getPower()){
+                this.kill();
+                this.WORLD.addKilled(this);
+                aggressiveOrganism.getWORLD().erasePosition(this.position);
+                aggressiveOrganism.move(move);
+            }
+            else{
+                aggressiveOrganism.getWORLD().addKilled(aggressiveOrganism);
+                aggressiveOrganism.kill();
+            }
+            aggressiveOrganism.getWORLD().erasePosition(organismX,organismY);
+        }
     }
 
 }

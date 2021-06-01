@@ -73,18 +73,28 @@ public abstract class Organism {
         return ORGANISM_ICON;
     }
 
-    public void Kill(){
+    public void kill(){
         this.alive=false;
         WORLD.addKilled(this);
     }
 
+    public void move(int x, int y) {
+        this.position.move(x, y);
+    }
+
+    public void move(Position position) {
+        this.position.move(position.getX(), position.getY());
+    }
+
+    abstract public void newOrganism(Position position);
+
     abstract public void action();
 
-    abstract public void collision();
+    abstract public void collision(Organism aggressiveOrganism, int organismX,int organismY, Position move);
 
-    abstract public boolean checkSpecies();
+    abstract public boolean checkSpecies(Organism organism);
 
     abstract public void draw();
 
-    abstract public Position breedPosition(Organism organism);
+    abstract public Position breedPosition();
 }

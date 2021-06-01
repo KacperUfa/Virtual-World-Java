@@ -124,6 +124,14 @@ public class World {
         deadOrganisms.add(organism);
     }
 
+    public Organism getOrganism(int x, int y){
+        return map.get(y).get(x);
+    }
+
+    public void erasePosition(int x, int y){
+        this.map.get(y).set(x, null);
+    }
+
     public void erasePosition(Position position){
         this.map.get(position.getY()).set(position.getX(), null);
     }
