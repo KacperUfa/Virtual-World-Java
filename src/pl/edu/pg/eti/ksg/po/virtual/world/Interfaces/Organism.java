@@ -113,6 +113,26 @@ public abstract class Organism {
         }
     }
 
+    public Position breedPosition(){
+        int actualX = this.position.getX();
+        int actualY = this.position.getY();
+        for(int i=-1;i<2;i++){
+            if(actualX+i<0 || actualX+i>this.getWORLD().getMapSize().getY()-1){
+                continue;
+            }
+            for(int j=-1;j<2;j++){
+                if(actualY+j<0 || actualY+j>this.getWORLD().getMapSize().getX()-1){
+                    continue;
+                }
+                if(this.getWORLD().getOrganism(actualX+i,actualY+j)==null){
+                    Position newPosition = new Position(actualX+i,actualY+j);
+                    return newPosition;
+                }
+            }
+        }
+        return null;
+    };
+
     abstract public void newOrganism(Position position);
 
     abstract public void action();
@@ -122,6 +142,4 @@ public abstract class Organism {
     abstract public boolean checkSpecies(Organism organism);
 
     abstract public void draw();
-
-    abstract public Position breedPosition();
 }
