@@ -7,20 +7,12 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 import javax.swing.*;
 
 public class Sheep extends Animal {
-    private final ImageIcon ORGANISM_ICON;
-
     public Sheep(Position position, World world) {
-
-        super(4, 4, position, world);
-
-        ORGANISM_ICON = new ImageIcon("resources/Images/sheep.png");
-
+        super(4,new ImageIcon("resources/Images/sheep.png"), 4, position, world);
     }
 
     public Sheep(int x, int y, World world) {
-        super(4, 4, x, y, world);
-
-        ORGANISM_ICON = new ImageIcon("resources/Images/sheep.png");
+        super(4,new ImageIcon("resources/Images/sheep.png"), 4, x, y, world);
     }
 
     @Override
