@@ -5,6 +5,7 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public abstract class Organism {
     private final int INITIATIVE;
@@ -84,6 +85,32 @@ public abstract class Organism {
 
     public void move(Position position) {
         this.position.move(position.getX(), position.getY());
+    }
+
+    public Position randomMove() {
+        Random random = new Random();
+        int x, y;
+        do {
+            x = random.nextInt(3) - 2;
+            y = random.nextInt(3) - 2;
+        }
+        while (x == 0 && y == 0);
+
+        Position vector = new Position(x, y);
+        return vector;
+    }
+
+    public void correctMove(Position move, Position worldSize, int actualX, int actualY){
+        if (actualX == 0 && randomMove().getX() < 0) {
+            move.setX(1);
+        } else if (actualX == worldSize.getY() - 1 && randomMove().getX() > 0) {
+            move.setX(-1);
+        }
+        if (actualY == 0 && randomMove().getY() < 0) {
+            move.setY(1);
+        } else if (actualY == worldSize.getX() - 1 && randomMove().getY() > 0) {
+            move.setY(-1);
+        }
     }
 
     abstract public void newOrganism(Position position);
