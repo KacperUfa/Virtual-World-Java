@@ -8,12 +8,12 @@ import javax.swing.*;
 import java.util.Random;
 
 public abstract class Plant extends Organism {
-    public Plant(int power, Position position, World world) {
-        super(0, power, position, world);
+    public Plant(int power, ImageIcon organismIcon,  Position position, World world) {
+        super(0, organismIcon, power, position, world);
     }
 
-    public Plant(int power, int x, int y, World world) {
-        super(0, power, x, y, world);
+    public Plant(int power,ImageIcon organismIcon ,int x, int y, World world) {
+        super(0, organismIcon ,power, x, y, world);
     }
 
     @Override
