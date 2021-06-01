@@ -69,11 +69,11 @@ public abstract class Organism {
     public World getWORLD() {
         return WORLD;
     }
-/*
+
     public ImageIcon getORGANISM_ICON() {
         return ORGANISM_ICON;
     }
-*/
+
     public void kill(){
         this.alive=false;
         WORLD.addKilled(this);
