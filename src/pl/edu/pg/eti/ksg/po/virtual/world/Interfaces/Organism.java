@@ -9,7 +9,7 @@ import java.awt.*;
 public abstract class Organism {
     private final int INITIATIVE;
     private final ImageIcon ORGANISM_ICON;
-    private World WORLD;
+    protected World WORLD;
 
     private int power;
     private boolean alive;
