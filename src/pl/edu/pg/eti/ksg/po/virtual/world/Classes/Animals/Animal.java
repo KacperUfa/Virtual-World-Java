@@ -8,12 +8,12 @@ import javax.swing.*;
 import java.util.Random;
 
 public abstract class Animal extends Organism {
-    public Animal(int initiative, ImageIcon organismIcon, int power, Position position, World world) {
-        super(initiative, organismIcon, power, position, world);
+    public Animal(int initiative, int power, Position position, World world) {
+        super(initiative, power, position, world);
     }
 
-    public Animal(int initiative, ImageIcon organismIcon, int power, int x, int y, World world) {
-        super(initiative, organismIcon, power, x, y, world);
+    public Animal(int initiative, int power, int x, int y, World world) {
+        super(initiative, power, x, y, world);
     }
 /*
     public Position randomMove() {

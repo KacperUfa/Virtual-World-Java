@@ -9,25 +9,25 @@ import java.util.Random;
 
 public abstract class Organism {
     private final int INITIATIVE;
-    private final ImageIcon ORGANISM_ICON;
+    //private final ImageIcon ORGANISM_ICON;
     protected World WORLD;
 
     private int power;
     private boolean alive;
     protected Position position;
 
-    public Organism(int initiative, ImageIcon organismIcon, int power, Position position, World world) {
+    public Organism(int initiative, int power, Position position, World world) {
         this.INITIATIVE = initiative;
-        this.ORGANISM_ICON = organismIcon;
+        //this.ORGANISM_ICON = organismIcon;
         this.power = power;
         this.alive = true;
         this.position = position;
         this.WORLD = world;
     }
 
-    public Organism(int initiative, ImageIcon organismIcon, int power, int x, int y, World world) {
+    public Organism(int initiative, int power, int x, int y, World world) {
         this.INITIATIVE = initiative;
-        this.ORGANISM_ICON = organismIcon;
+        //this.ORGANISM_ICON = organismIcon;
         this.power = power;
         this.alive = true;
         this.position = new Position(x, y);
@@ -69,11 +69,11 @@ public abstract class Organism {
     public World getWORLD() {
         return WORLD;
     }
-
+/*
     public ImageIcon getORGANISM_ICON() {
         return ORGANISM_ICON;
     }
-
+*/
     public void kill(){
         this.alive=false;
         WORLD.addKilled(this);
@@ -133,13 +133,18 @@ public abstract class Organism {
         return null;
     };
 
+    public boolean checkSpecies(Organism organism){
+        if(organism.getClass()==this.getClass()){
+            return true;
+        }
+        return false;
+    }
+
     abstract public void newOrganism(Position position);
 
     abstract public void action();
 
     abstract public void collision(Organism aggressiveOrganism, int organismX,int organismY, Position move);
-
-    abstract public boolean checkSpecies(Organism organism);
 
     abstract public void draw();
 }
