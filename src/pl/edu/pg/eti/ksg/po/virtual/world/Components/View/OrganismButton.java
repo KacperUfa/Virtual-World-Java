@@ -1,25 +1,25 @@
 package pl.edu.pg.eti.ksg.po.virtual.world.Components.View;
 
-import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organizm;
+import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class OrganismButton extends JButton {
-    Organizm organizm;
+    Organism organism;
 
 
-    public OrganismButton(Organizm organizm) {
-        this.organizm = organizm;
+    public OrganismButton(Organism organizm) {
+        this.organism = organizm;
     }
 
     public OrganismButton() {
         super();
     }
 
-    public OrganismButton(String text, Organizm organizm) {
+    public OrganismButton(String text, Organism organizm) {
         super(text);
-        this.organizm = organizm;
+        this.organism = organizm;
     }
 
     public OrganismButton(Icon icon) {
@@ -30,11 +30,11 @@ public class OrganismButton extends JButton {
         super(text);
     }
 
-    public Organizm getOrganism() {
-        return organizm;
+    public Organism getOrganism() {
+        return organism;
     }
 
-    public void setOrganism(Organizm organizm) {
-        this.organizm = organizm;
+    public void setOrganism(Organism organizm) {
+        this.organism = organizm;
     }
 }
