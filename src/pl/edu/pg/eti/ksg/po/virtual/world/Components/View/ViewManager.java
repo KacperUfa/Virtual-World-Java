@@ -39,7 +39,7 @@ public class ViewManager {
              *  Add getIcon method to Organism class.
              * ((OrganismButton) cpt).setIcon(scaleIcon((cpt.getIcon()), cpt.getSize().width, cpt.getSize().height));
              **/
-            ((OrganismButton) cpt).setIcon(scaleIcon(new ImageIcon("resources/Images/fox.png"), cpt.getSize().width, cpt.getSize().height));
+            ((OrganismButton) cpt).setIcon(scaleIcon(new ImageIcon("resources/Images/cyberSheep.png"), cpt.getSize().width, cpt.getSize().height));
         });
     }
 
