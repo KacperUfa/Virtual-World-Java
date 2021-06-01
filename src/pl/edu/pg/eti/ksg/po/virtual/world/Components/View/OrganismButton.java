@@ -15,6 +15,7 @@ public class OrganismButton extends JButton {
 
     public void setPosition(Position position) {
         this.position = position;
+        this.organism = null;
     }
 
     public OrganismButton(Organism organism) {
@@ -48,6 +49,8 @@ public class OrganismButton extends JButton {
     }
 
     public ImageIcon getOrganismIcon() {
-        return this.organism.getORGANISM_ICON();
+        if(this.organism != null)
+            return this.organism.getORGANISM_ICON();
+        return new ImageIcon("resources/Images/fox.png");
     }
 }

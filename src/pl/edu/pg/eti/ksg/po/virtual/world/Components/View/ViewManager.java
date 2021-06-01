@@ -1,6 +1,7 @@
 package pl.edu.pg.eti.ksg.po.virtual.world.Components.View;
 
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
+import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,7 @@ public class ViewManager {
     private final JFrame frame;
     private JPanel buttonsPanel;
 
-    public ViewManager(String windowTitle, int sizeX, int sizeY) {
+    public ViewManager(String windowTitle, int sizeX, int sizeY, Organism organism) {
         this.frame = new JFrame(windowTitle);
         this.frame.setSize(1000, 1000);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,10 +20,9 @@ public class ViewManager {
         this.frame.setLocationRelativeTo(null);
         createPanelWithButtons(sizeX, sizeY);
         this.frame.add(this.buttonsPanel, BorderLayout.CENTER);
+        addOrganismToButton(organism);
         this.frame.setVisible(true);
-        OrganismButton og = findButton(new Position(3, 4));
-        og.setText("DUPA");
-        ///this.fillButtonsWithTheirImages(panel);
+        this.fillButtonsWithTheirImages();
     }
 
     private static ImageIcon scaleIcon(ImageIcon icon, int width, int height) {
@@ -46,16 +46,28 @@ public class ViewManager {
 
     private void fillButtonsWithTheirImages() {
         Component[] components = this.buttonsPanel.getComponents();
+        /*
+        TODO
+          lambda bug
         java.util.Arrays.stream(components).forEach((cpt) -> {
-            ((OrganismButton) cpt).setIcon(scaleIcon((((OrganismButton) cpt).getOrganismIcon()), cpt.getSize().width, cpt.getSize().height));
-        });
+            if(((OrganismButton) cpt).getOrganismIcon() != null) {
+                ((OrganismButton) cpt).setIcon(scaleIcon((((OrganismButton) cpt).getOrganismIcon()), cpt.getSize().width, cpt.getSize().height));
+            }
+        });*/
+        for(Component component : components){
+            if(((OrganismButton) component).getOrganism() == null){
+                continue;
+            }
+            ((OrganismButton) component).setIcon(((OrganismButton) component).getOrganismIcon());
+        }
     }
 
-    /*
-        public void addOrganismToButton(Organism organism) {
-            this.buttonsPanel
-        }
-    */
+
+    public void addOrganismToButton(Organism organism) {
+        OrganismButton button = findButton(organism.getPosition());
+        button.setOrganism(organism);
+    }
+
     private OrganismButton findButton(Position position) {
         Component[] components = this.buttonsPanel.getComponents();
         java.util.List<Component> listOfButton = Arrays.stream(components)
