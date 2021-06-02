@@ -31,8 +31,9 @@ public class Parnsip extends Plant {
                     continue;
                 }
                 Organism organismTmp = this.getWORLD().getOrganism(actualX+i,actualY+j);
+                boolean isInstance = organismTmp instanceof Plant;
                 Class c = organismTmp.getClass();
-                if(organismTmp!=null && !c.getSimpleName().equals("CyberSheep")){
+                if(organismTmp!=null && !c.getSimpleName().equals("CyberSheep") && !isInstance){
                     Position newPosition = new Position(actualX+i,actualY+j);
 
                     organismTmp.getWORLD().addKilled(organismTmp);
