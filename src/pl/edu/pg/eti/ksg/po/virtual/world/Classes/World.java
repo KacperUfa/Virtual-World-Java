@@ -44,6 +44,20 @@ public class World {
         placeOnMap();
     }
 
+    public void addOrganisms(){
+        for(Organism organism: newOrganisms){
+            organisms.add(organism);
+        }
+        newOrganisms.clear();
+    }
+
+    public void removeOrganisms(){
+        for(Organism organism: deadOrganisms){
+            organisms.remove(organism);
+        }
+        deadOrganisms.clear();
+    }
+
     public void placeOnMap() {
         this.organisms.forEach(organism -> {
             organism.setWORLD(this);
