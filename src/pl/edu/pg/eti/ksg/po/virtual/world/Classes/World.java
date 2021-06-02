@@ -97,6 +97,8 @@ public class World {
                 }
             }
         });*/
+        addOrganisms();
+        removeOrganisms();
     }
 
     public void organiseQueue(){
