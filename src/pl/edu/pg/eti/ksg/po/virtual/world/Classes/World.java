@@ -142,4 +142,10 @@ public class World {
         int y = organism.getPosition().getY();
         this.map.get(y).set(x, organism);
     }
+
+    public void placeOrganism(Organism organism){
+        int x = organism.getPosition().getX();
+        int y = organism.getPosition().getY();
+        this.map.get(y).set(x, organism);
+    }
 }
