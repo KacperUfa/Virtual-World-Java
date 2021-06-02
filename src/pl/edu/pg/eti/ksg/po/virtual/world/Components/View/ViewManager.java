@@ -12,7 +12,9 @@ import java.util.stream.Collectors;
 public class ViewManager {
     private final JFrame frame;
     private JPanel buttonsPanel;
-    private ArrayList<Organism> organisms;
+    private int sizeX;
+    private int sizeY;
+
 
     public ViewManager(String windowTitle, int sizeX, int sizeY) {
         this.frame = new JFrame(windowTitle);
@@ -20,10 +22,11 @@ public class ViewManager {
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setLocationRelativeTo(null);
-        createPanelWithButtons(sizeX, sizeY);
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+        createPanelWithButtons();
         this.frame.add(this.buttonsPanel, BorderLayout.CENTER);
         this.frame.setVisible(true);
-        this.fillButtonsWithTheirImages();
     }
 
     private static ImageIcon scaleIcon(ImageIcon icon, int width, int height) {
@@ -32,12 +35,12 @@ public class ViewManager {
         return new ImageIcon(image);
     }
 
-    private void createPanelWithButtons(int sizeX, int sizeY) {
-        int availableButtons = sizeX * sizeY;
+    private void createPanelWithButtons() {
+        int availableButtons = this.sizeX * this.sizeY;
         this.buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new GridLayout(sizeX, sizeY));
-        for (int i = 0; i < sizeX; i++) {
-            for (int j = 0; j < sizeY; j++) {
+        buttonsPanel.setLayout(new GridLayout(this.sizeX, this.sizeY));
+        for (int i = 0; i < this.sizeX; i++) {
+            for (int j = 0; j < this.sizeY; j++) {
                 OrganismButton button = new OrganismButton(new Position(j, i));
                 buttonsPanel.add(button);
             }
@@ -78,12 +81,26 @@ public class ViewManager {
                 continue;
             button.setOrganism(o);
         }
-        this.fillButtonsWithTheirImages();
-        this.refresh();
     }
 
     public void refresh() {
         this.frame.setVisible(false);
         this.frame.setVisible(true);
+    }
+
+    public void clearCanvas(){
+        this.frame.remove(this.buttonsPanel);
+        this.frame.revalidate();
+        this.frame.repaint();
+        this.createPanelWithButtons();
+        this.frame.add(this.buttonsPanel, BorderLayout.CENTER);
+        this.frame.add(this.buttonsPanel);
+        this.frame.setVisible(true);
+    }
+    public void updateCanvas(ArrayList<Organism> organisms){
+        this.clearCanvas();
+        this.addOrganismsToButtons(organisms);
+        this.fillButtonsWithTheirImages();
+        this.refresh();
     }
 }

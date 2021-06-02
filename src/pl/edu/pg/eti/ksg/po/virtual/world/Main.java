@@ -16,13 +16,6 @@ public class Main {
         int sizeX = 5;
         int sizeY = 10;
 
-
-
-        /*SwingUtilities.invokeLater(() -> {
-            new ViewManager(appTitle, sizeX, sizeY);
-        });*/
-
-
         Sheep sheep = new Sheep(new Position(4, 9), null);
         Sheep sheep2 = new Sheep(new Position(4, 4), null);
         ViewManager vw = new ViewManager(appTitle, sizeY, sizeX);
@@ -32,7 +25,8 @@ public class Main {
         vw.addOrganismsToButtons(organisms);
         World world = new World(sizeX, sizeY, organisms);
 
-        ///world.makeTurn();
+        world.makeTurn();
+        vw.updateCanvas(organisms);
         System.out.println(sheep.getPosition().getX());
         System.out.println(sheep.getPosition().getY());
         System.out.println(sheep2.getPosition().getX());
