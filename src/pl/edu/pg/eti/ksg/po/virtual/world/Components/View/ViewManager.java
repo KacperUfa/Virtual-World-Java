@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.ksg.po.virtual.world.Components.View;
 
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Wolf;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
@@ -61,6 +62,8 @@ public class ViewManager implements ActionListener {
         for (int i = 0; i < this.sizeX; i++) {
             for (int j = 0; j < this.sizeY; j++) {
                 OrganismButton button = new OrganismButton(new Position(j, i));
+                button.setActionCommand("addOrganism");
+                button.addActionListener(this);
                 this.buttonsPanel.add(button);
             }
         }
@@ -114,6 +117,8 @@ public class ViewManager implements ActionListener {
         this.container.add(this.buttonsPanel);
         this.frame.add(this.container);
         this.frame.setVisible(true);
+        this.container.revalidate();
+        this.container.repaint();
         this.frame.revalidate();
         this.frame.repaint();
     }
@@ -129,8 +134,16 @@ public class ViewManager implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("makeTurn")) {
             this.world.makeTurn();
-            clearCanvas();
-            updateCanvas();
+            this.updateCanvas();
+        }
+        if (e.getActionCommand().equals("addOrganism")) {
+            OrganismButton butOrganism = (OrganismButton) e.getSource();
+            int x = butOrganism.position.getX();
+            int y = butOrganism.position.getY();
+            Wolf wolf = new Wolf(x, y, this.world);
+            this.world.addNew(wolf);
+            this.world.addOrganisms();
+            this.updateCanvas();
         }
     }
 }

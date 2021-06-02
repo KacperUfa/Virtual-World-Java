@@ -16,7 +16,6 @@ public class Main {
         String appTitle = "Virtual World";
         int sizeX = 5;
         int sizeY = 10;
-
         Sheep sheep = new Sheep(new Position(2, 3), null);
         Sheep sheep2 = new Sheep(new Position(1, 3), null);
         Sheep sheep3 = new Sheep(new Position(0, 0), null);
@@ -25,6 +24,7 @@ public class Main {
         organisms.add(sheep);
         organisms.add(wolf1);
         World world = new World(sizeX, sizeY, organisms);
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
