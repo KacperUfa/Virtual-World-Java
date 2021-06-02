@@ -17,17 +17,17 @@ public class CyberSheep extends Animal {
 
     public Position setMove(Position move, int i, int j) {
         if (this.position.getY() > i) {
-            move.setY(1);
-        } else if (this.position.getY() < i) {
             move.setY(-1);
+        } else if (this.position.getY() < i) {
+            move.setY(1);
         }
         else{
             move.setY(0);
         }
         if (this.position.getX() > j) {
-            move.setX(1);
-        } else if (this.position.getX() < j) {
             move.setX(-1);
+        } else if (this.position.getX() < j) {
+            move.setX(1);
         }
         else{
             move.setX(0);
@@ -39,66 +39,84 @@ public class CyberSheep extends Animal {
     public Position findWeed() {
         int x = 0;
         int y = 0;
+        int xVec =0;
+        int yVec=0;
         int sum = 0;
         Position move = new Position(0, 0);
-        for (int i = 0; i < this.WORLD.getMapSize().getY() - 1; i++) {
-            for (int j = 0; j < this.WORLD.getMapSize().getX() - 1; j++) {
+        for (int i = 0; i < this.WORLD.getMapSize().getX(); i++) {
+            for (int j = 0; j < this.WORLD.getMapSize().getY(); j++) {
 
                 //hogweed
                 Organism organism = this.WORLD.getOrganism(i, j);
-                Class c = organism.getClass();
-                if (c.getSimpleName().equals("Parnsip")) {
-                    int tmpX = Math.abs(this.position.getX() - j);
-                    int tmpY = Math.abs(this.position.getY() - i);
-                    if (!(x == 0 && y == 0)) {
-                        int tmpSum = tmpX + tmpY;
-                        if (sum > tmpSum) {
-                            x = this.position.getX() - j;
-                            y = this.position.getY() - i;
-                            sum = tmpSum;
-
-                            this.setMove(move, i, j);
+                if(organism!=null){
+                    Class c = organism.getClass();
+                    if (c.getSimpleName().equals("Parnsip")) {
+                        int tmpX = Math.abs(this.position.getX() - i);
+                        int tmpY = Math.abs(this.position.getY() - j);
+                        if (!(xVec == 0 && yVec == 0)) {
+                            int tmpSum = tmpX + tmpY;
+                            if (sum > tmpSum) {
+                                xVec=tmpX;
+                                yVec=tmpY;
+                                x = j;
+                                y = i;
+                                sum = tmpSum;
+                                this.setMove(move, j, i);
+                            }
                         }
-                    } else {
-                        x = this.position.getX() - j;
-                        y = this.position.getY() - i;
-                        sum = tmpX + tmpY;
+                        else {
+                            xVec=tmpX;
+                            yVec=tmpY;
 
-                        this.setMove(move, i, j);
+
+                            x = j;
+                            y = i;
+                            sum = tmpX + tmpY;
+
+                            this.setMove(move, j, i);
+                        }
                     }
                 }
+
             }
         }
+        //this.setMove(move, x, y);
         return move;
     }
 
     public Position findWeedPosition() {
         int x = 0;
         int y = 0;
+        int xVec =0;
+        int yVec=0;
         int sum = 0;
-        for (int i = 0; i < this.WORLD.getMapSize().getY() - 1; i++) {
-            for (int j = 0; j < this.WORLD.getMapSize().getX() - 1; j++) {
+        for (int i = 0; i < this.WORLD.getMapSize().getX(); i++) {
+            for (int j = 0; j < this.WORLD.getMapSize().getY(); j++) {
 
                 //hogweed
                 Organism organism = this.WORLD.getOrganism(i, j);
-                Class c = organism.getClass();
-                if (c.getSimpleName().equals("Parnsip")) {
-                    int tmpX = Math.abs(this.position.getX() - j);
-                    int tmpY = Math.abs(this.position.getY() - i);
-                    if (!(x == 0 && y == 0)) {
-                        int tmpSum = tmpX + tmpY;
-                        if (sum > tmpSum) {
-                            x = this.position.getX() - j;
-                            y = this.position.getY() - i;
-                            sum = tmpSum;
+                if(organism!=null){
+                    Class c = organism.getClass();
+                    if (c.getSimpleName().equals("Parnsip")) {
+                        int tmpX = Math.abs(this.position.getX() - i);
+                        int tmpY = Math.abs(this.position.getY() - j);
+                        if (!(sum==0)) {
+                            int tmpSum = tmpX + tmpY;
+                            if (sum > tmpSum) {
+                                x = i;
+                                y = j;
+                                sum = tmpSum;
+                            }
                         }
-                    } else {
-                        x = this.position.getX() - j;
-                        y = this.position.getY() - i;
-                        sum = tmpX + tmpY;
+                        else {
+                            x = i;
+                            y = j;
+                            sum = tmpX + tmpY;
 
+                        }
                     }
                 }
+
             }
         }
         return new Position(x,y);
@@ -106,6 +124,7 @@ public class CyberSheep extends Animal {
 
     @Override
     public void action(){
+        System.out.println(this.getClass().getSimpleName());
         Position move=this.findWeed();
         if(move.getX()==0 && move.getY()==0){
             super.action();
@@ -118,6 +137,7 @@ public class CyberSheep extends Animal {
             Organism tmpOrganism = this.WORLD.getOrganism(xAction, yAction);
             if(tmpOrganism==null){
                 this.move(move.getX(), move.getY());
+                this.WORLD.erasePosition(actualX,actualY);
             }
             else{
                 tmpOrganism.collision(this, actualX, actualY, move);

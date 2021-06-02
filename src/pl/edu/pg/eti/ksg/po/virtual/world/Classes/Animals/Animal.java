@@ -18,6 +18,7 @@ public abstract class Animal extends Organism {
 
     @Override
     public void action() {
+        System.out.println(this.getClass().getSimpleName());
         int actualX = this.position.getX();
         int actualY = this.position.getY();
         Position worldSize = this.getWORLD().getMapSize();

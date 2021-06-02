@@ -3,6 +3,9 @@ package pl.edu.pg.eti.ksg.po.virtual.world.Classes;
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class World {
     private ArrayList<Organism> organisms;
@@ -31,16 +34,9 @@ public class World {
                 this.map.get(i).add(null);
             }
         }
-        //this.map = new ArrayList<ArrayList<Organism>>(y);
-        /*
-        this.map.forEach((element) -> element = new ArrayList<Organism>(x));
-        this.map.forEach(element -> {
-            element = this.clearArray(element);
-            System.out.println("xd");
-        });
-        */
         this.newOrganisms.clear();
         this.deadOrganisms.clear();
+        this.sortOrganisms();
         placeOnMap();
     }
 
@@ -99,18 +95,14 @@ public class World {
         });*/
         addOrganisms();
         removeOrganisms();
+        sortOrganisms();
+
     }
 
     public void organiseQueue(){
-        this.deadOrganisms.forEach(organism -> {
-            this.organisms.remove(organism);
-            this.deadOrganisms.remove(organism);
-        });
-        this.newOrganisms.forEach(organism -> {
-            this.organisms.add(organism);
-            this.newOrganisms.remove(organism);
-        });
-        this.sortOrganisms();
+        addOrganisms();
+        removeOrganisms();
+        sortOrganisms();
     }
 
     public ArrayList<ArrayList<Organism>> getMap() {
@@ -157,13 +149,32 @@ public class World {
         ArrayList<Organism> tmpOrganisms = new ArrayList<Organism>();
         for (int i = 7; i >= 0; i--) {
             int x = i;
+            /*
+            for(Organism organism:organisms){
+                if (organism.getINITIATIVE() == i) {
+                    if(organism.isAlive()){
+                        tmpOrganisms.add(organism);
+                    }
+
+                }
+            }
+            /*
             organisms.forEach((element) -> {
                 if (element.getINITIATIVE() == x) {
                     tmpOrganisms.add(element);
                 }
-            });
+            });*/
         }
-        organisms = tmpOrganisms;
+        //setOrganisms(tmpOrganisms);
+        Comparator x= Comparator.comparing(Organism::getINITIATIVE);
+        organisms.sort(x);
+        Collections.reverse(organisms);
+        //Arrays.sort(this.organisms, Collections.reverseOrder());
+        //Arrays.sort(organisms, );
+
+        //sort(T[] a, Comparator<? super T> c)
+
+        //Arrays.sort(a, Collections.reverseOrder());
     }
 
     public void addKilled(Organism organism) {
