@@ -75,8 +75,8 @@ public class World {
 
                     int x = organism.getPosition().getX();
                     int y = organism.getPosition().getY();
-                    System.out.println(x);
-                    System.out.println(y);
+                    //System.out.println(x);
+                    //System.out.println(y);
                     this.map.get(y).set(x, organism);
 
 
@@ -97,6 +97,8 @@ public class World {
                 }
             }
         });*/
+        addOrganisms();
+        removeOrganisms();
     }
 
     public void organiseQueue(){

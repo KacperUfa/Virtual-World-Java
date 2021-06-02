@@ -1,6 +1,7 @@
 package pl.edu.pg.eti.ksg.po.virtual.world;
 
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Sheep;
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Wolf;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
 import pl.edu.pg.eti.ksg.po.virtual.world.Components.View.ViewManager;
@@ -16,11 +17,15 @@ public class Main {
         int sizeX = 5;
         int sizeY = 10;
 
-        Sheep sheep = new Sheep(new Position(4, 9), null);
-        Sheep sheep2 = new Sheep(new Position(4, 4), null);
+        Sheep sheep = new Sheep(new Position(2, 3), null);
+        Sheep sheep2 = new Sheep(new Position(1, 3), null);
+        Sheep sheep3 = new Sheep(new Position(0, 0), null);
+        Wolf wolf1 = new Wolf(1, 2, null);
         ArrayList<Organism> organisms = new ArrayList<Organism>();
         organisms.add(sheep);
         organisms.add(sheep2);
+        organisms.add(sheep3);
+        organisms.add(wolf1);
         World world = new World(sizeX, sizeY, organisms);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -40,9 +45,5 @@ public class Main {
         System.out.println(world.getOrganism(x1, y1).getClass().getSimpleName());
         System.out.println(world.getOrganism(x2, y2).getClass().getSimpleName());
         ///world.makeTurn();
-        for (int i = 0; i < 100; i++) {
-            ///world.makeTurn();
-        }
-        //sheep.action();
     }
 }

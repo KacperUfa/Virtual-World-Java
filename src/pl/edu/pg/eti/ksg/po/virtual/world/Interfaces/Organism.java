@@ -90,25 +90,25 @@ public abstract class Organism {
     public Position randomMove() {
         Random random = new Random();
         int x, y;
-        do {
+        x = random.nextInt(3) - 1;
+        y = random.nextInt(3) - 1;
+        while (x == 0 && y == 0){
             x = random.nextInt(3) - 1;
             y = random.nextInt(3) - 1;
         }
-        while (x == 0 && y == 0);
 
-        Position vector = new Position(x, y);
-        return vector;
+        return new Position(x, y);
     }
 
     public void correctMove(Position move, Position worldSize, int actualX, int actualY){
-        if (actualX == 0 && move.getX() < 0) {
+        if (actualX == 0 && move.getX() == -1) {
             move.setX(1);
-        } else if (actualX == worldSize.getX() - 1 && move.getX() > 0) {
+        } else if (actualX == worldSize.getX() - 1 && move.getX() ==1) {
             move.setX(-1);
         }
-        if (actualY == 0 && move.getY() < 0) {
+        if (actualY == 0 && move.getY() ==-1) {
             move.setY(1);
-        } else if (actualY == worldSize.getY() - 1 && move.getY() > 0) {
+        } else if (actualY == worldSize.getY() - 1 && move.getY() ==1) {
             move.setY(-1);
         }
     }
@@ -117,11 +117,11 @@ public abstract class Organism {
         int actualX = this.position.getX();
         int actualY = this.position.getY();
         for(int i=-1;i<2;i++){
-            if(actualX+i<0 || actualX+i>this.getWORLD().getMapSize().getY()-1){
+            if(actualX+i<0 || actualX+i>this.getWORLD().getMapSize().getX()-1){
                 continue;
             }
             for(int j=-1;j<2;j++){
-                if(actualY+j<0 || actualY+j>this.getWORLD().getMapSize().getX()-1){
+                if(actualY+j<0 || actualY+j>this.getWORLD().getMapSize().getY()-1){
                     continue;
                 }
                 if(this.getWORLD().getOrganism(actualX+i,actualY+j)==null){
