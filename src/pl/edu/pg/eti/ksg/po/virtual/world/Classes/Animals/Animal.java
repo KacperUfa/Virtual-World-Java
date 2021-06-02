@@ -28,6 +28,7 @@ public abstract class Animal extends Organism {
         Organism tmpOrganism = this.WORLD.getOrganism(xAction, yAction);
         if(tmpOrganism==null){
             this.move(move.getX(), move.getY());
+            this.WORLD.erasePosition(actualX,actualY);
         }
         else{
             tmpOrganism.collision(this, actualX, actualY, move);
