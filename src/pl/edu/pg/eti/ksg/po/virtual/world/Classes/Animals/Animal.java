@@ -15,36 +15,17 @@ public abstract class Animal extends Organism {
     public Animal(int initiative, ImageIcon organismIcon, int power, int x, int y, World world) {
         super(initiative, organismIcon, power, x, y, world);
     }
-/*
-    public Position randomMove() {
-        Random random = new Random();
-        int x, y;
-        do {
-            x = random.nextInt(3) - 2;
-            y = random.nextInt(3) - 2;
-        }
-        while (x == 0 && y == 0);
-
-        Position vector = new Position(x, y);
-        return vector;
-    }*/
 
     @Override
     public void action() {
         int actualX = this.position.getX();
         int actualY = this.position.getY();
-        Position actualPosition = this.position;
         Position worldSize = this.getWORLD().getMapSize();
-
         Position move = randomMove();
-
         correctMove(move,worldSize,actualX,actualY);
-
         int xAction = actualX+move.getX();
         int yAction = actualY+move.getY();
-
         Organism tmpOrganism = this.WORLD.getOrganism(xAction, yAction);
-
         if(tmpOrganism==null){
             this.move(move.getX(), move.getY());
         }
