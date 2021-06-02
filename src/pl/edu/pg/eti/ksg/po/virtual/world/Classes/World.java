@@ -58,11 +58,15 @@ public class World {
             if (organism.isAlive()) {
                 organism.action();
                 if (organism.isAlive()) {
+
                     int x = organism.getPosition().getX();
                     int y = organism.getPosition().getY();
                     System.out.println(x);
                     System.out.println(y);
                     this.map.get(y).set(x, organism);
+
+
+                    //placeOrganism(organism);
                 }
             }
         }

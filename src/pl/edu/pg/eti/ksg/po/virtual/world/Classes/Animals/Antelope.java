@@ -17,6 +17,20 @@ public class Antelope extends Animal {
     }
 
     @Override
+    public void correctMove(Position move,Position worldSize,int actualX,int actualY){
+        if (actualX == 0 && move.getX() < 0) {
+            move.setX(2);
+        } else if (actualX == worldSize.getX() - 2 && move.getX() > 0) {
+            move.setX(-2);
+        }
+        if (actualY == 0 && move.getY() < 0) {
+            move.setY(2);
+        } else if (actualY == worldSize.getY() - 2 && move.getY() > 0) {
+            move.setY(-2);
+        }
+    }
+
+    @Override
     public void action(){
         int actualX = this.position.getX();
         int actualY = this.position.getY();
