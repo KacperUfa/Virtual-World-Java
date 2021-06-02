@@ -1,6 +1,7 @@
 package pl.edu.pg.eti.ksg.po.virtual.world;
 
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Sheep;
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Wolf;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
 import pl.edu.pg.eti.ksg.po.virtual.world.Components.View.ViewManager;
@@ -15,13 +16,15 @@ public class Main {
         String appTitle = "Virtual World";
         int sizeX = 5;
         int sizeY = 10;
-
         Sheep sheep = new Sheep(new Position(4, 9), null);
         Sheep sheep2 = new Sheep(new Position(4, 4), null);
+        Sheep sheep3 = new Sheep(new Position(0, 0), null);
         ArrayList<Organism> organisms = new ArrayList<Organism>();
         organisms.add(sheep);
         organisms.add(sheep2);
+        organisms.add(sheep3);
         World world = new World(sizeX, sizeY, organisms);
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -43,6 +46,5 @@ public class Main {
         for (int i = 0; i < 100; i++) {
             ///world.makeTurn();
         }
-        //sheep.action();
     }
 }
