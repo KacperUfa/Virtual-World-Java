@@ -28,6 +28,7 @@ public class Fox extends Animal {
 
         if (tmpOrganism == null) {
             this.move(move.getX(), move.getY());
+            this.WORLD.erasePosition(actualX,actualY);
         } else {
             if (tmpOrganism.getPower() <= this.getPower()) {
                 tmpOrganism.collision(this, actualX, actualY, move);
