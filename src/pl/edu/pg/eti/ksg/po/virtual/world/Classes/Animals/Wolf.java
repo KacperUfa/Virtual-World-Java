@@ -8,11 +8,11 @@ import javax.swing.*;
 public class Wolf extends Animal{
 
     public Wolf(Position position, World world) {
-        super(5, new ImageIcon("resources/Images/sheep.png"), 9, position, world);
+        super(5, new ImageIcon("resources/Images/wolf.png"), 9, position, world);
     }
 
     public Wolf(int x, int y, World world) {
-        super(5, new ImageIcon("resources/Images/sheep.png"), 9, x, y, world);
+        super(5, new ImageIcon("resources/Images/wolf.png"), 9, x, y, world);
     }
 
     @Override
