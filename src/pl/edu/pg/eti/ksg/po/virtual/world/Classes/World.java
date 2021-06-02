@@ -138,9 +138,7 @@ public class World {
 
     public void addNew(Organism organism) {
         newOrganisms.add(organism);
-        int x = organism.getPosition().getX();
-        int y = organism.getPosition().getY();
-        this.map.get(y).set(x, organism);
+        this.placeOrganism(organism);
     }
 
     public void placeOrganism(Organism organism){
