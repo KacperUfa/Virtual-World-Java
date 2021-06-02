@@ -18,15 +18,17 @@ public class Main {
 
         Sheep sheep = new Sheep(new Position(4, 9), null);
         Sheep sheep2 = new Sheep(new Position(4, 4), null);
-        ViewManager vw = new ViewManager(appTitle, sizeY, sizeX);
         ArrayList<Organism> organisms = new ArrayList<Organism>();
         organisms.add(sheep);
         organisms.add(sheep2);
-        vw.addOrganismsToButtons(organisms);
         World world = new World(sizeX, sizeY, organisms);
-
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new ViewManager(appTitle, sizeY, sizeX, world);
+            }
+        });
         world.makeTurn();
-        vw.updateCanvas(organisms);
         System.out.println(sheep.getPosition().getX());
         System.out.println(sheep.getPosition().getY());
         System.out.println(sheep2.getPosition().getX());

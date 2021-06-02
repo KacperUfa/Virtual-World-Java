@@ -1,22 +1,33 @@
 package pl.edu.pg.eti.ksg.po.virtual.world.Components.View;
 
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class ViewManager {
+public class ViewManager implements ActionListener {
     private final JFrame frame;
     private JPanel buttonsPanel;
+    private JPanel otherButtons;
+    private JPanel container;
     private int sizeX;
     private int sizeY;
+    private World world;
+    private ArrayList<Organism> organisms;
 
-
-    public ViewManager(String windowTitle, int sizeX, int sizeY) {
+    public ViewManager(String windowTitle, int sizeX, int sizeY, World world) {
+        this.world = world;
+        this.organisms = this.world.getOrganisms();
+        this.otherButtons = new JPanel();
+        this.container = new JPanel();
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         this.frame = new JFrame(windowTitle);
         this.frame.setSize(1000, 1000);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,7 +36,16 @@ public class ViewManager {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         createPanelWithButtons();
-        this.frame.add(this.buttonsPanel, BorderLayout.CENTER);
+        JButton makeTurn = new JButton("Make Turn");
+        makeTurn.addActionListener(this);
+        makeTurn.setActionCommand("makeTurn");
+        this.otherButtons.add(makeTurn);
+        this.otherButtons.setVisible(true);
+        this.otherButtons.setVisible(true);
+        this.buttonsPanel.setVisible(true);
+        this.container.add(this.otherButtons);
+        this.container.add(this.buttonsPanel);
+        this.frame.add(this.container);
         this.frame.setVisible(true);
     }
 
@@ -36,16 +56,15 @@ public class ViewManager {
     }
 
     private void createPanelWithButtons() {
-        int availableButtons = this.sizeX * this.sizeY;
         this.buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new GridLayout(this.sizeX, this.sizeY));
+        this.buttonsPanel.setLayout(new GridLayout(this.sizeX, this.sizeY));
         for (int i = 0; i < this.sizeX; i++) {
             for (int j = 0; j < this.sizeY; j++) {
                 OrganismButton button = new OrganismButton(new Position(j, i));
-                buttonsPanel.add(button);
+                this.buttonsPanel.add(button);
             }
         }
-        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+        this.buttonsPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
     }
 
     public void fillButtonsWithTheirImages() {
@@ -74,8 +93,8 @@ public class ViewManager {
         return (OrganismButton) listOfButton.get(0);
     }
 
-    public void addOrganismsToButtons(ArrayList<Organism> organisms) {
-        for (Organism o : organisms) {
+    public void addOrganismsToButtons() {
+        for (Organism o : this.organisms) {
             OrganismButton button = findButton(o.getPosition());
             if (button == null)
                 continue;
@@ -88,19 +107,30 @@ public class ViewManager {
         this.frame.setVisible(true);
     }
 
-    public void clearCanvas(){
-        this.frame.remove(this.buttonsPanel);
+    public void clearCanvas() {
+        this.frame.remove(this.container);
+        this.container.remove(this.buttonsPanel);
+        this.createPanelWithButtons();
+        this.container.add(this.buttonsPanel);
+        this.frame.add(this.container);
+        this.frame.setVisible(true);
         this.frame.revalidate();
         this.frame.repaint();
-        this.createPanelWithButtons();
-        this.frame.add(this.buttonsPanel, BorderLayout.CENTER);
-        this.frame.add(this.buttonsPanel);
-        this.frame.setVisible(true);
     }
-    public void updateCanvas(ArrayList<Organism> organisms){
+
+    public void updateCanvas() {
         this.clearCanvas();
-        this.addOrganismsToButtons(organisms);
+        this.addOrganismsToButtons();
         this.fillButtonsWithTheirImages();
         this.refresh();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("makeTurn")) {
+            this.world.makeTurn();
+            clearCanvas();
+            updateCanvas();
+        }
     }
 }
