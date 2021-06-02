@@ -91,8 +91,8 @@ public abstract class Organism {
         Random random = new Random();
         int x, y;
         do {
-            x = random.nextInt(3) - 2;
-            y = random.nextInt(3) - 2;
+            x = random.nextInt(3) - 1;
+            y = random.nextInt(3) - 1;
         }
         while (x == 0 && y == 0);
 
@@ -103,12 +103,12 @@ public abstract class Organism {
     public void correctMove(Position move, Position worldSize, int actualX, int actualY){
         if (actualX == 0 && move.getX() < 0) {
             move.setX(1);
-        } else if (actualX == worldSize.getY() - 1 && move.getX() > 0) {
+        } else if (actualX == worldSize.getX() - 1 && move.getX() > 0) {
             move.setX(-1);
         }
         if (actualY == 0 && move.getY() < 0) {
             move.setY(1);
-        } else if (actualY == worldSize.getX() - 1 && move.getY() > 0) {
+        } else if (actualY == worldSize.getY() - 1 && move.getY() > 0) {
             move.setY(-1);
         }
     }
