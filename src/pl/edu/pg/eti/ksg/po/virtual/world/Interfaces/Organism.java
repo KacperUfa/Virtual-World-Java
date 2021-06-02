@@ -101,14 +101,14 @@ public abstract class Organism {
     }
 
     public void correctMove(Position move, Position worldSize, int actualX, int actualY){
-        if (actualX == 0 && randomMove().getX() < 0) {
+        if (actualX == 0 && move.getX() < 0) {
             move.setX(1);
-        } else if (actualX == worldSize.getY() - 1 && randomMove().getX() > 0) {
+        } else if (actualX == worldSize.getY() - 1 && move.getX() > 0) {
             move.setX(-1);
         }
-        if (actualY == 0 && randomMove().getY() < 0) {
+        if (actualY == 0 && move.getY() < 0) {
             move.setY(1);
-        } else if (actualY == worldSize.getX() - 1 && randomMove().getY() > 0) {
+        } else if (actualY == worldSize.getX() - 1 && move.getY() > 0) {
             move.setY(-1);
         }
     }

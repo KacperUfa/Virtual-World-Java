@@ -23,11 +23,22 @@ public class World {
         this.mapSize = new Position(x, y);
         this.newOrganisms = new ArrayList<Organism>();
         this.deadOrganisms = new ArrayList<Organism>();
-        this.map = new ArrayList<ArrayList<Organism>>(y);
+        this.map = new ArrayList<ArrayList<Organism>>();
+        //this.map.get() = new ArrayList<Organism>(3);
+        for(int i=0; i<y; i++){
+            this.map.add(new ArrayList<Organism>());
+            for(int j=0;j<x;j++){
+                this.map.get(i).add(null);
+            }
+        }
+        //this.map = new ArrayList<ArrayList<Organism>>(y);
+        /*
         this.map.forEach((element) -> element = new ArrayList<Organism>(x));
         this.map.forEach(element -> {
             element = this.clearArray(element);
+            System.out.println("xd");
         });
+        */
         this.newOrganisms.clear();
         this.deadOrganisms.clear();
         placeOnMap();
