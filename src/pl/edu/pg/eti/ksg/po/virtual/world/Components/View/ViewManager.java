@@ -1,6 +1,5 @@
 package pl.edu.pg.eti.ksg.po.virtual.world.Components.View;
 
-import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Wolf;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
@@ -137,6 +136,7 @@ public class ViewManager implements ActionListener {
             this.updateCanvas();
         }
         if (e.getActionCommand().equals("addOrganism")) {
+            /*
             OrganismButton butOrganism = (OrganismButton) e.getSource();
             int x = butOrganism.position.getX();
             int y = butOrganism.position.getY();
@@ -144,6 +144,27 @@ public class ViewManager implements ActionListener {
             this.world.addNew(wolf);
             this.world.addOrganisms();
             this.updateCanvas();
+             */
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    JFrame jframe = new JFrame();
+                    jframe.setSize(200, 300);
+                    JPanel jp = new JPanel();
+                    jp.setLayout(new BoxLayout(jp, BoxLayout.X_AXIS));
+                    JButton jb = new JButton("1");
+                    JButton jb2 = new JButton("2");
+                    JButton jb3 = new JButton("3");
+                    JButton jb4 = new JButton("4");
+                    jp.add(jb);
+                    jp.add(jb2);
+                    jp.add(jb3);
+                    jp.add(jb4);
+                    jframe.add(jp);
+                    jframe.setVisible(true);
+
+                }
+            });
         }
     }
 }
