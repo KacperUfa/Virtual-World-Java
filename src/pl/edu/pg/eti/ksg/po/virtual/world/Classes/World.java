@@ -54,16 +54,31 @@ public class World {
     }
 
     public void makeTurn() {
+        for(Organism organism: organisms){
+            if (organism.isAlive()) {
+                organism.action();
+                if (organism.isAlive()) {
+                    int x = organism.getPosition().getX();
+                    int y = organism.getPosition().getY();
+                    System.out.println(x);
+                    System.out.println(y);
+                    this.map.get(y).set(x, organism);
+                }
+            }
+        }
+        /*
         this.organisms.forEach(organism -> {
             if (organism.isAlive()) {
                 organism.action();
                 if (organism.isAlive()) {
                     int x = organism.getPosition().getX();
                     int y = organism.getPosition().getY();
+                    System.out.println(x);
+                    System.out.println(y);
                     this.map.get(y).set(x, organism);
                 }
             }
-        });
+        });*/
     }
 
     public void organiseQueue(){
