@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class SaveLoad {
 
-    public ArrayList<Organism> load() {
+    public World load() {
 
         //File file = new File("gameSave/save.txt");
         //ArrayList<Organism> organisms = new ArrayList<>();
@@ -113,7 +113,8 @@ public class SaveLoad {
                 System.out.println(organismX.getClass().getSimpleName()+" "+organismX.getPosition().getX()+" "+organismX.getPosition().getY());
             }
             System.out.println(worldX+" "+worldY);
-            return organisms;
+            World newWorld = new World(worldX, worldY,organisms);
+            return newWorld;
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

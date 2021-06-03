@@ -44,7 +44,8 @@ public class Main {
         //World world = new World(sizeX, sizeY, organisms);
         Human human2 = null;
         SaveLoad load = new SaveLoad();
-        organisms = load.load();
+        World world = load.load();
+        organisms = world.getOrganisms();
         boolean found = false;
         for(Organism organism:organisms){
             if(organism.getClass().getSimpleName().equals("Human")){
@@ -60,15 +61,15 @@ public class Main {
         else{
             human = human2;
         }
-        World world = new World(sizeX, sizeY, organisms);
+        //World world = new World(sizeX, sizeY, organisms);
 
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                //int worldX = worldLoad.getMapSize().getX();
-                //int worldY = worldLoad.getMapSize().getY();
-                new ViewManager(appTitle, sizeY, sizeX, world, human);
+                int worldX = world.getMapSize().getX();
+                int worldY = world.getMapSize().getY();
+                new ViewManager(appTitle, worldY , worldX, world, human);
             }
         });
     }
