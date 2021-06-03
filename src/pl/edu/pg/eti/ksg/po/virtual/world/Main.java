@@ -7,12 +7,16 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Wolf;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Plants.Grass;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Plants.Parnsip;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.SaveLoad;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
 import pl.edu.pg.eti.ksg.po.virtual.world.Components.View.ViewManager;
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class Main {
 
@@ -38,6 +42,15 @@ public class Main {
         organisms.add(sheep2);
         organisms.add(human);
         World world = new World(sizeX, sizeY, organisms);
+
+        SaveLoad load = new SaveLoad();
+        try {
+            load.load(null);
+        }
+        catch (FileNotFoundException e){
+
+        }
+
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

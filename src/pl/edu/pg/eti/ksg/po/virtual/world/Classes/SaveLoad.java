@@ -8,18 +8,19 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class SaveLoad {
 
-    public void load(World world){
+    public void load(World world) throws FileNotFoundException {
+
         File file = new File("gameSave/save.txt");
         try {
             Scanner scanner = new Scanner(file);
-            String tmpString = "";
             while(scanner.hasNextLine()){
-                tmpString=scanner.nextLine();
-
+                //tmpString=scanner.next();
+                System.out.println(scanner.next());
             }
         }
         catch (FileNotFoundException e) {
@@ -43,8 +44,11 @@ public class SaveLoad {
                 tmpString += name+" "+x+" "+y+" "+power+"\n";
             }
         }
+
+        String XD =  tmpString.substring(0, tmpString.length() - 1);  ;
+
         FileWriter fileWriter = new FileWriter("gameSave/save.txt");
-        fileWriter.write(tmpString);
+        fileWriter.write(XD);
         fileWriter.close();
     }
 }
