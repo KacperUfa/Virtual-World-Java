@@ -13,14 +13,11 @@ public class HumanManager implements ActionListener {
     private JPanel midKeyPanel;
     private JPanel downKeyPanel;
     private Human human;
-    private Position move;
     private ViewManager viewManager;
 
     public HumanManager(Human human, ViewManager viewManager){
         this.human=human;
         this.viewManager=viewManager;
-        //this.move=move;
-        //this.done=done;
         jframe = new JFrame("Human move");
         upKeyPanel = new JPanel();
         midKeyPanel = new JPanel();
@@ -81,8 +78,6 @@ public class HumanManager implements ActionListener {
         int yButton = humanButton.getYy();
         System.out.println(xButton+" na "+yButton);
         human.setMove(new Position(xButton,yButton));
-        //done.setDone(true);
-        //notifyAll();
         human.getWORLD().makeTurn();
         viewManager.updateCanvas();
         jframe.dispose();
