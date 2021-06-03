@@ -27,8 +27,8 @@ public class AddManager implements ActionListener {
         jframe.setSize(1000, 400);
         animalPanel = new JPanel();
         plantPanel = new JPanel();
-        animalPanel.setBounds(20, 20, 980, 200);
-        plantPanel.setBounds(20, 220, 980, 200);
+        animalPanel.setBounds(20, 20, 960, 170);
+        plantPanel.setBounds(20, 210, 960, 170);
         this.x=x;
         this.y=y;
         this.view=view;
@@ -71,7 +71,6 @@ public class AddManager implements ActionListener {
         jframe.add(animalPanel);
         jframe.add(plantPanel);
         jframe.setLayout(null);
-        //jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setResizable(false);
         jframe.setVisible(true);
     }
@@ -81,10 +80,7 @@ public class AddManager implements ActionListener {
         AddButton butOrganism = (AddButton) e.getSource();
         System.out.println(butOrganism.getOrganism().getClass().getSimpleName());
         super.getClass().getSimpleName();
-        //Class newOrganism = butOrganism.getOrganism().getClass();
         Organism newOrganism = butOrganism.getOrganism();
-        //butOrganism.getOrganism().getClass().cast(newOrganism);
-        //butOrganism.getOrganism().getClass().
          newOrganism.setPosition(new Position(x,y));
          newOrganism.setWORLD(this.world);
         this.world.addNew(newOrganism);

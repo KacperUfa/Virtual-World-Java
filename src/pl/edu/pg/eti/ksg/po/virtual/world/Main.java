@@ -1,6 +1,7 @@
 package pl.edu.pg.eti.ksg.po.virtual.world;
 
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.CyberSheep;
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Human;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Sheep;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Wolf;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Plants.Grass;
@@ -26,19 +27,21 @@ public class Main {
         Parnsip parnsip2 = new Parnsip(0,9,null);
         Grass grass1=new Grass(0,1,null);
         CyberSheep cyberSheep1 = new CyberSheep(4,9,null);
-        Wolf wolf1 = new Wolf(1, 2, null);
+        Wolf wolf1 = new Wolf(3, 9, null);
+
+        Human human = new Human(4,9,null);
         ArrayList<Organism> organisms = new ArrayList<Organism>();
-        organisms.add(sheep3);
-        organisms.add(parnsip1);
-        organisms.add(grass1);
-        organisms.add(cyberSheep1);
-        //organisms.add(sheep1);
+        //organisms.add(sheep3);
+        //organisms.add(parnsip1);
+        //organisms.add(grass1);
+        organisms.add(human);
+        //organisms.add(wolf1);
         World world = new World(sizeX, sizeY, organisms);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ViewManager(appTitle, sizeY, sizeX, world);
+                new ViewManager(appTitle, sizeY, sizeX, world, human);
             }
         });
     }

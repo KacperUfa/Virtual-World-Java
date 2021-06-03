@@ -23,8 +23,10 @@ public class ViewManager implements ActionListener {
     private int sizeY;
     private World world;
     private ArrayList<Organism> organisms;
+    private Human human;
 
-    public ViewManager(String windowTitle, int sizeX, int sizeY, World world) {
+    public ViewManager(String windowTitle, int sizeX, int sizeY, World world, Human human) {
+        this.human=human;
         this.world = world;
         this.organisms = this.world.getOrganisms();
         this.otherButtons = new JPanel();
@@ -135,8 +137,14 @@ public class ViewManager implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("makeTurn")) {
-            this.world.makeTurn();
-            this.updateCanvas();
+            if(human.isAlive()){
+                HumanManager humanManager = new HumanManager(human,this);
+            }
+            else{
+                this.world.makeTurn();
+                this.updateCanvas();
+            }
+
         }
         if (e.getActionCommand().equals("addOrganism")) {
 

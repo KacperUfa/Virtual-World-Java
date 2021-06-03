@@ -64,9 +64,10 @@ public class World {
     }
 
     public void makeTurn() {
-        System.out.println("\n");
+        //System.out.println("\n");
         for(Organism organism: organisms){
             if (organism.isAlive()) {
+
                 organism.action();
                 if (organism.isAlive()) {
 
