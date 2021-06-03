@@ -1,5 +1,7 @@
 package pl.edu.pg.eti.ksg.po.virtual.world.Components.View;
 
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.*;
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Plants.*;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
@@ -49,7 +51,7 @@ public class ViewManager implements ActionListener {
         this.frame.setVisible(true);
     }
 
-    private static ImageIcon scaleIcon(ImageIcon icon, int width, int height) {
+    public static ImageIcon scaleIcon(ImageIcon icon, int width, int height) {
         Image image = icon.getImage();
         image = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(image);
@@ -149,18 +151,63 @@ public class ViewManager implements ActionListener {
                 @Override
                 public void run() {
                     JFrame jframe = new JFrame();
-                    jframe.setSize(200, 300);
-                    JPanel jp = new JPanel();
-                    jp.setLayout(new BoxLayout(jp, BoxLayout.X_AXIS));
-                    JButton jb = new JButton("1");
-                    JButton jb2 = new JButton("2");
-                    JButton jb3 = new JButton("3");
-                    JButton jb4 = new JButton("4");
-                    jp.add(jb);
-                    jp.add(jb2);
-                    jp.add(jb3);
-                    jp.add(jb4);
-                    jframe.add(jp);
+                    jframe.setSize(1000, 400);
+                    JPanel animalPanel = new JPanel();
+                    JPanel plantPanel = new JPanel();
+                    animalPanel.setBounds(20, 20, 980, 200);
+                    plantPanel.setBounds(20, 220, 980, 200);
+                    //animalPanel.setLayout(new BoxLayout(animalPanel, BoxLayout.X_AXIS));
+                    //plantPanel.setLayout(new BoxLayout(plantPanel, BoxLayout.X_AXIS));
+
+                    //animals
+                    ArrayList<AddButton> animalArray= new ArrayList<>();
+                    AddButton antelopeButton = new AddButton(new Antelope(0, 0, null));
+                    AddButton foxButton = new AddButton(new Fox(0, 0, null));
+                    AddButton sheepButton = new AddButton(new Sheep(0, 0, null));
+                    AddButton wolfButton = new AddButton(new Wolf(0, 0, null));
+                    AddButton turtleButton = new AddButton(new Turtle(0, 0, null));
+                    AddButton cyberSheepButton = new AddButton(new CyberSheep(0, 0, null));
+                    animalArray.add(antelopeButton);
+                    animalArray.add(foxButton);
+                    animalArray.add(sheepButton);
+                    animalArray.add(wolfButton);
+                    animalArray.add(turtleButton);
+                    animalArray.add(cyberSheepButton);
+                    //plants
+                    ArrayList<AddButton> plantArray= new ArrayList<>();
+                    AddButton dandelionButton = new AddButton(new Dandelion(0, 0, null));
+                    AddButton grassButton = new AddButton(new Grass(0, 0, null));
+                    AddButton guaranaButton = new AddButton(new Guarana(0, 0, null));
+                    AddButton nigshtshadeButton = new AddButton(new NightShade(0, 0, null));
+                    AddButton parnsipButton = new AddButton(new Parnsip(0, 0, null));
+                    plantArray.add(dandelionButton);
+                    plantArray.add(grassButton);
+                    plantArray.add(guaranaButton);
+                    plantArray.add(nigshtshadeButton);
+                    plantArray.add(parnsipButton);
+
+                    for(AddButton button:animalArray){
+                        animalPanel.add(button);
+                    }
+                    for(AddButton button:plantArray){
+                        plantPanel.add(button);
+                    }
+                    /*
+                    animalPanel.add(antelopeButton);
+                    animalPanel.add(foxButton);
+                    animalPanel.add(sheepButton);
+                    animalPanel.add(wolfButton);
+                    animalPanel.add(turtleButton);
+                    animalPanel.add(cyberSheepButton);
+                    plantPanel.add(dandelionButton);
+                    plantPanel.add(grassButton);
+                    plantPanel.add(guaranaButton);
+                    plantPanel.add(nigshtshadeButton);
+                    plantPanel.add(parnsipButton);
+                    */
+                    jframe.add(animalPanel);
+                    jframe.add(plantPanel);
+                    jframe.setLayout(null);
                     jframe.setVisible(true);
 
                 }
