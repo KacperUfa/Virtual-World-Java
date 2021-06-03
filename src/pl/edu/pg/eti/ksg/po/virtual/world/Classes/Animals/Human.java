@@ -1,0 +1,102 @@
+package pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals;
+
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.DoneCheck;
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
+import pl.edu.pg.eti.ksg.po.virtual.world.Components.View.HumanManager;
+import pl.edu.pg.eti.ksg.po.virtual.world.Components.View.ViewManager;
+import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
+
+import javax.swing.*;
+import java.util.concurrent.TimeUnit;
+
+public class Human extends Animal{
+    private int countSpecial;
+    private boolean ableToActivate;
+    private Position move;
+    private static Object lock = new Object();
+
+    public Human(Position position, World world) {
+        super(4, new ImageIcon("resources/Images/human.png"), 5, position, world);
+        this.ableToActivate=true;
+        this.countSpecial=0;
+        this.move = new Position(0,0);
+    }
+
+    public Human(int x, int y, World world) {
+        super(4, new ImageIcon("resources/Images/human.png"), 5, x, y, world);
+        this.ableToActivate=true;
+        this.countSpecial=0;
+    }
+
+    public Position getMove() {
+        return move;
+    }
+
+    public void setMove(Position move) {
+        this.move = move;
+    }
+
+    public int getCountSpecial() {
+        return countSpecial;
+    }
+
+    public boolean isAbleToActivate() {
+        return ableToActivate;
+    }
+
+    public void setCountSpecial(int countSpecial) {
+        this.countSpecial = countSpecial;
+    }
+
+    public void setCanActivate(boolean canActivate) {
+        this.ableToActivate = canActivate;
+    }
+
+    @Override
+    public void action(){
+        System.out.println(this.move.getX()+" "+ this.move.getY());
+        if(!this.isAbleToActivate()){
+            this.countSpecial=this.countSpecial-1;
+            if(this.countSpecial==0){
+                this.setCanActivate(true);
+            }
+            else if(this.countSpecial>4){
+                this.setPower(this.getPower()-1);
+            }
+        }
+
+
+        if(!(this.move.getX()==0 && this.move.getY()==0)){
+            int actualX = this.getPosition().getX();
+            int actualY = this.getPosition().getY();
+            int xAction = actualX+this.move.getX();
+            int yAction = actualY+this.move.getY();
+            Organism tmpOrganism = this.WORLD.getOrganism(xAction, yAction);
+            if(tmpOrganism==null){
+                this.move(move.getX(), move.getY());
+                this.WORLD.erasePosition(actualX,actualY);
+            }
+            else{
+                tmpOrganism.collision(this, actualX, actualY, move);
+            }
+        }
+        else{
+            this.setPower(this.getPower()+5);
+            this.countSpecial=10;
+            this.setCanActivate(false);
+        }
+
+    }
+
+    @Override
+    public void newOrganism(Position position) {
+        Human human = new Human(position, this.WORLD);
+        this.WORLD.addNew(human);
+    }
+
+    @Override
+    public void draw() {
+
+    }
+}

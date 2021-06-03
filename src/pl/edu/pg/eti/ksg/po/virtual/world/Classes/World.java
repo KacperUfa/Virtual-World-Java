@@ -3,6 +3,9 @@ package pl.edu.pg.eti.ksg.po.virtual.world.Classes;
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class World {
     private ArrayList<Organism> organisms;
@@ -23,14 +26,32 @@ public class World {
         this.mapSize = new Position(x, y);
         this.newOrganisms = new ArrayList<Organism>();
         this.deadOrganisms = new ArrayList<Organism>();
-        this.map = new ArrayList<ArrayList<Organism>>(y);
-        this.map.forEach((element) -> element = new ArrayList<Organism>(x));
-        this.map.forEach(element -> {
-            element = this.clearArray(element);
-        });
+        this.map = new ArrayList<ArrayList<Organism>>();
+        //this.map.get() = new ArrayList<Organism>(3);
+        for(int i=0; i<y; i++){
+            this.map.add(new ArrayList<Organism>());
+            for(int j=0;j<x;j++){
+                this.map.get(i).add(null);
+            }
+        }
         this.newOrganisms.clear();
         this.deadOrganisms.clear();
+        this.sortOrganisms();
         placeOnMap();
+    }
+
+    public void addOrganisms(){
+        for(Organism organism: newOrganisms){
+            organisms.add(organism);
+        }
+        newOrganisms.clear();
+    }
+
+    public void removeOrganisms(){
+        for(Organism organism: deadOrganisms){
+            organisms.remove(organism);
+        }
+        deadOrganisms.clear();
     }
 
     public void placeOnMap() {
@@ -43,28 +64,48 @@ public class World {
     }
 
     public void makeTurn() {
+        //System.out.println("\n");
+        for(Organism organism: organisms){
+            if (organism.isAlive()) {
+
+                organism.action();
+                if (organism.isAlive()) {
+
+                    int x = organism.getPosition().getX();
+                    int y = organism.getPosition().getY();
+                    //System.out.println(x);
+                    //System.out.println(y);
+                    this.map.get(y).set(x, organism);
+
+
+                    //placeOrganism(organism);
+                }
+            }
+        }
+        /*
         this.organisms.forEach(organism -> {
             if (organism.isAlive()) {
                 organism.action();
                 if (organism.isAlive()) {
                     int x = organism.getPosition().getX();
                     int y = organism.getPosition().getY();
+                    System.out.println(x);
+                    System.out.println(y);
                     this.map.get(y).set(x, organism);
                 }
             }
-        });
+        });*/
+        addOrganisms();
+        removeOrganisms();
+        sortOrganisms();
+        sortOrganisms();
+
     }
 
     public void organiseQueue(){
-        this.deadOrganisms.forEach(organism -> {
-            this.organisms.remove(organism);
-            this.deadOrganisms.remove(organism);
-        });
-        this.newOrganisms.forEach(organism -> {
-            this.organisms.add(organism);
-            this.newOrganisms.remove(organism);
-        });
-        this.sortOrganisms();
+        addOrganisms();
+        removeOrganisms();
+        sortOrganisms();
     }
 
     public ArrayList<ArrayList<Organism>> getMap() {
@@ -111,13 +152,32 @@ public class World {
         ArrayList<Organism> tmpOrganisms = new ArrayList<Organism>();
         for (int i = 7; i >= 0; i--) {
             int x = i;
+            /*
+            for(Organism organism:organisms){
+                if (organism.getINITIATIVE() == i) {
+                    if(organism.isAlive()){
+                        tmpOrganisms.add(organism);
+                    }
+
+                }
+            }
+            /*
             organisms.forEach((element) -> {
                 if (element.getINITIATIVE() == x) {
                     tmpOrganisms.add(element);
                 }
-            });
+            });*/
         }
-        organisms = tmpOrganisms;
+        //setOrganisms(tmpOrganisms);
+        Comparator x= Comparator.comparing(Organism::getINITIATIVE);
+        organisms.sort(x);
+        Collections.reverse(organisms);
+        //Arrays.sort(this.organisms, Collections.reverseOrder());
+        //Arrays.sort(organisms, );
+
+        //sort(T[] a, Comparator<? super T> c)
+
+        //Arrays.sort(a, Collections.reverseOrder());
     }
 
     public void addKilled(Organism organism) {

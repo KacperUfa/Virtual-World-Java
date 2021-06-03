@@ -18,6 +18,7 @@ public abstract class Animal extends Organism {
 
     @Override
     public void action() {
+        System.out.println(this.getClass().getSimpleName());
         int actualX = this.position.getX();
         int actualY = this.position.getY();
         Position worldSize = this.getWORLD().getMapSize();
@@ -28,6 +29,7 @@ public abstract class Animal extends Organism {
         Organism tmpOrganism = this.WORLD.getOrganism(xAction, yAction);
         if(tmpOrganism==null){
             this.move(move.getX(), move.getY());
+            this.WORLD.erasePosition(actualX,actualY);
         }
         else{
             tmpOrganism.collision(this, actualX, actualY, move);
