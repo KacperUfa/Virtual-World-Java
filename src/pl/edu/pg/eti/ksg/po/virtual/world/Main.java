@@ -33,28 +33,41 @@ public class Main {
         CyberSheep cyberSheep1 = new CyberSheep(4,9,null);
         Wolf wolf1 = new Wolf(3, 9, null);
 
-        Human human = new Human(4,9,null);
+        //Human human = new Human(4,9,null);
         ArrayList<Organism> organisms = new ArrayList<Organism>();
-        organisms.add(sheep3);
-        organisms.add(parnsip1);
-        organisms.add(grass1);
-        organisms.add(wolf1);
-        organisms.add(sheep2);
-        organisms.add(human);
-        World world = new World(sizeX, sizeY, organisms);
-
+        //organisms.add(sheep3);
+        //organisms.add(parnsip1);
+        //organisms.add(grass1);
+        //organisms.add(wolf1);
+        //organisms.add(sheep2);
+        //organisms.add(human);
+        //World world = new World(sizeX, sizeY, organisms);
+        Human human2 = null;
         SaveLoad load = new SaveLoad();
-        try {
-            load.load(null);
+        organisms = load.load();
+        boolean found = false;
+        for(Organism organism:organisms){
+            if(organism.getClass().getSimpleName().equals("Human")){
+                human2 = (Human) organism;
+                found = true;
+                break;
+            }
         }
-        catch (FileNotFoundException e){
-
+        Human human;
+        if(human2==null){
+             human=null;
         }
+        else{
+            human = human2;
+        }
+        World world = new World(sizeX, sizeY, organisms);
 
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                //int worldX = worldLoad.getMapSize().getX();
+                //int worldY = worldLoad.getMapSize().getY();
                 new ViewManager(appTitle, sizeY, sizeX, world, human);
             }
         });
