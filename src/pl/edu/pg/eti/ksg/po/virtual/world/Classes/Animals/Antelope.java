@@ -17,55 +17,53 @@ public class Antelope extends Animal {
     }
 
     @Override
-    public void correctMove(Position move,Position worldSize,int actualX,int actualY){
-        if (actualX == 0 && move.getX() < 0) {
+    public void correctMove(Position move, Position worldSize, int actualX, int actualY) {
+        if ((actualX == 0 || actualX == 1) && move.getX() < 0) {
             move.setX(2);
-        } else if (actualX == worldSize.getX() - 2 && move.getX() > 0) {
+        } else if ((actualX == worldSize.getX() - 2 || actualX == worldSize.getX() - 1) && move.getX() > 0) {
             move.setX(-2);
         }
-        if (actualY == 0 && move.getY() < 0) {
+        if ((actualY == 0 || actualY == 1) && move.getY() < 0) {
             move.setY(2);
-        } else if (actualY == worldSize.getY() - 2 && move.getY() > 0) {
+        } else if ((actualY == worldSize.getY() - 2 || actualY == worldSize.getY() - 1) && move.getY() > 0) {
             move.setY(-2);
         }
     }
 
     @Override
-    public void action(){
+    public void action() {
         int actualX = this.position.getX();
         int actualY = this.position.getY();
         Position worldSize = this.getWORLD().getMapSize();
         Position move = randomMove();
-        move.setX(move.getX()*2);
-        move.setY(move.getY()*2);
-        correctMove(move,worldSize,actualX,actualY);
-        int xAction = actualX+move.getX();
-        int yAction = actualY+move.getY();
+        move.setX(move.getX() * 2);
+        move.setY(move.getY() * 2);
+        correctMove(move, worldSize, actualX, actualY);
+        int xAction = actualX + move.getX();
+        int yAction = actualY + move.getY();
         Organism tmpOrganism = this.WORLD.getOrganism(xAction, yAction);
-        if(tmpOrganism==null){
+        if (tmpOrganism == null) {
             this.move(move.getX(), move.getY());
-            this.WORLD.erasePosition(actualX,actualY);
-        }
-        else{
+            this.WORLD.erasePosition(actualX, actualY);
+        } else {
             tmpOrganism.collision(this, actualX, actualY, move);
         }
     }
 
     @Override
-    public void collision(Organism aggressiveOrganism, int organismX,int organismY, Position move){
+    public void collision(Organism aggressiveOrganism, int organismX, int organismY, Position move) {
         Random random = new Random();
         int rand = random.nextInt(2);
         Position breedPosition = this.breedPosition();
-        if(rand==0 && breedPosition!=null && !aggressiveOrganism.checkSpecies(this)){
+        if (rand == 0 && breedPosition != null && !aggressiveOrganism.checkSpecies(this)) {
             int xTmp = this.position.getX();
             int yTmp = this.position.getY();
             this.setPosition(breedPosition);
             this.WORLD.placeOrganism(this);
-            this.WORLD.erasePosition(xTmp,yTmp);
+            this.WORLD.erasePosition(xTmp, yTmp);
             aggressiveOrganism.move(move);
-            aggressiveOrganism.getWORLD().erasePosition(organismX,organismY);
-        }
-        else{
+            aggressiveOrganism.getWORLD().erasePosition(organismX, organismY);
+        } else {
             super.collision(aggressiveOrganism, organismX, organismY, move);
         }
     }
