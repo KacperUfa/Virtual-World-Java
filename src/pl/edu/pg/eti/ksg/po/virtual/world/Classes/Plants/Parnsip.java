@@ -17,23 +17,30 @@ public class Parnsip extends Plant {
 
     @Override
     public void action(){
+        System.out.println(this.getClass().getSimpleName());
         super.action();
 
         int actualX = this.position.getX();
         int actualY = this.position.getY();
 
         for(int i=-1;i<2;i++){
-            if(actualX+i<0 || actualX+i>this.getWORLD().getMapSize().getY()-1){
+            if(actualX+i<0 || actualX+i>this.getWORLD().getMapSize().getX()-1){
                 continue;
             }
             for(int j=-1;j<2;j++){
-                if(actualY+j<0 || actualY+j>this.getWORLD().getMapSize().getX()-1){
+                if(actualY+j<0 || actualY+j>this.getWORLD().getMapSize().getY()-1){
                     continue;
                 }
                 Organism organismTmp = this.getWORLD().getOrganism(actualX+i,actualY+j);
-                boolean isInstance = organismTmp instanceof Plant;
-                Class c = organismTmp.getClass();
-                if(organismTmp!=null && !c.getSimpleName().equals("CyberSheep") && !isInstance){
+                boolean isInstance = true;
+                boolean isCyber = false;
+                if(organismTmp!=null) {
+                    isInstance = organismTmp instanceof Plant;
+                    Class c = organismTmp.getClass();
+                    isCyber=c.getSimpleName().equals("CyberSheep");
+                }
+
+                if(organismTmp!=null && !isCyber && !isInstance){
                     Position newPosition = new Position(actualX+i,actualY+j);
 
                     organismTmp.getWORLD().addKilled(organismTmp);
