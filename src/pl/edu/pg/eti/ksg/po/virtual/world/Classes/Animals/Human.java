@@ -1,14 +1,8 @@
 package pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals;
-
-import pl.edu.pg.eti.ksg.po.virtual.world.Classes.DoneCheck;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
-import pl.edu.pg.eti.ksg.po.virtual.world.Components.View.HumanManager;
-import pl.edu.pg.eti.ksg.po.virtual.world.Components.View.ViewManager;
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
-
 import javax.swing.*;
-import java.util.concurrent.TimeUnit;
 
 public class Human extends Animal{
     private int countSpecial;
@@ -55,7 +49,6 @@ public class Human extends Animal{
 
     @Override
     public void action(){
-        System.out.println(this.move.getX()+" "+ this.move.getY());
         if(!this.isAbleToActivate()){
             this.countSpecial=this.countSpecial-1;
             if(this.countSpecial==0){

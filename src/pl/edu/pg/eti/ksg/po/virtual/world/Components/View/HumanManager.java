@@ -76,7 +76,6 @@ public class HumanManager implements ActionListener {
         HumanButton humanButton = (HumanButton) e.getSource();
         int xButton = humanButton.getXx();
         int yButton = humanButton.getYy();
-        System.out.println(xButton+" na "+yButton);
         human.setMove(new Position(xButton,yButton));
         human.getWORLD().makeTurn();
         viewManager.updateCanvas();
