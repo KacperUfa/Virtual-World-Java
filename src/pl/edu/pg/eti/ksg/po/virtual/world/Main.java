@@ -31,11 +31,12 @@ public class Main {
 
         Human human = new Human(4,9,null);
         ArrayList<Organism> organisms = new ArrayList<Organism>();
-        //organisms.add(sheep3);
-        //organisms.add(parnsip1);
-        //organisms.add(grass1);
+        organisms.add(sheep3);
+        organisms.add(parnsip1);
+        organisms.add(grass1);
+        organisms.add(wolf1);
+        organisms.add(sheep2);
         organisms.add(human);
-        //organisms.add(wolf1);
         World world = new World(sizeX, sizeY, organisms);
 
         SwingUtilities.invokeLater(new Runnable() {

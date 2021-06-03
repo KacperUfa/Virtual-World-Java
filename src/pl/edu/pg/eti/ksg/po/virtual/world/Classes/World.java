@@ -2,6 +2,7 @@ package pl.edu.pg.eti.ksg.po.virtual.world.Classes;
 
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -64,41 +65,31 @@ public class World {
     }
 
     public void makeTurn() {
-        //System.out.println("\n");
         for(Organism organism: organisms){
             if (organism.isAlive()) {
-
                 organism.action();
                 if (organism.isAlive()) {
-
+/*
                     int x = organism.getPosition().getX();
                     int y = organism.getPosition().getY();
-                    //System.out.println(x);
-                    //System.out.println(y);
                     this.map.get(y).set(x, organism);
-
-
-                    //placeOrganism(organism);
+*/
+                    placeOrganism(organism);
                 }
             }
         }
-        /*
-        this.organisms.forEach(organism -> {
-            if (organism.isAlive()) {
-                organism.action();
-                if (organism.isAlive()) {
-                    int x = organism.getPosition().getX();
-                    int y = organism.getPosition().getY();
-                    System.out.println(x);
-                    System.out.println(y);
-                    this.map.get(y).set(x, organism);
-                }
-            }
-        });*/
+
         addOrganisms();
         removeOrganisms();
         sortOrganisms();
         sortOrganisms();
+        SaveLoad save = new SaveLoad();
+        try {
+            save.save(this.organisms);
+        }
+        catch (IOException e){
+
+        }
 
     }
 
