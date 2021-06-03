@@ -124,12 +124,13 @@ public class CyberSheep extends Animal {
 
     @Override
     public void action(){
-        System.out.println(this.getClass().getSimpleName());
+
         Position move=this.findWeed();
         if(move.getX()==0 && move.getY()==0){
             super.action();
         }
         else{
+            System.out.println(this.getClass().getSimpleName());
             int actualX = this.position.getX();
             int actualY = this.position.getY();
             int xAction = actualX+move.getX();
