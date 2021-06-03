@@ -49,6 +49,7 @@ public class ViewManager implements ActionListener {
         this.container.add(this.buttonsPanel);
         this.frame.add(this.container);
         this.frame.setVisible(true);
+        this.updateCanvas();
     }
 
     public static ImageIcon scaleIcon(ImageIcon icon, int width, int height) {
