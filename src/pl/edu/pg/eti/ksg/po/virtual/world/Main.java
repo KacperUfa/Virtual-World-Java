@@ -56,7 +56,8 @@ public class Main {
         }
         Human human;
         if(human2==null){
-             human=null;
+             human= new Human(0,0,world);
+             human.setAlive(false);
         }
         else{
             human = human2;
