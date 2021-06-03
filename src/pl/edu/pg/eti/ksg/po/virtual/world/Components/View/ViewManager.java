@@ -140,73 +140,17 @@ public class ViewManager implements ActionListener {
         if (e.getActionCommand().equals("addOrganism")) {
 
             OrganismButton butOrganism = (OrganismButton) e.getSource();
-            int x = butOrganism.position.getX();
-            int y = butOrganism.position.getY();
-            /*
-            Wolf wolf = new Wolf(x, y, this.world);
-            this.world.addNew(wolf);
-            this.world.addOrganisms();
-            this.updateCanvas();
-             */
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    AddManager addManager = new AddManager(x,y,world);
-                    /*
-                    JFrame jframe = new JFrame();
-                    jframe.setSize(1000, 400);
-                    JPanel animalPanel = new JPanel();
-                    JPanel plantPanel = new JPanel();
-                    animalPanel.setBounds(20, 20, 980, 200);
-                    plantPanel.setBounds(20, 220, 980, 200);
-                    //animalPanel.setLayout(new BoxLayout(animalPanel, BoxLayout.X_AXIS));
-                    //plantPanel.setLayout(new BoxLayout(plantPanel, BoxLayout.X_AXIS));
-
-                    //animals
-                    ArrayList<AddButton> animalArray= new ArrayList<>();
-                    AddButton antelopeButton = new AddButton(new Antelope(0, 0, null));
-                    AddButton foxButton = new AddButton(new Fox(0, 0, null));
-                    AddButton sheepButton = new AddButton(new Sheep(0, 0, null));
-                    AddButton wolfButton = new AddButton(new Wolf(0, 0, null));
-                    AddButton turtleButton = new AddButton(new Turtle(0, 0, null));
-                    AddButton cyberSheepButton = new AddButton(new CyberSheep(0, 0, null));
-                    animalArray.add(antelopeButton);
-                    animalArray.add(foxButton);
-                    animalArray.add(sheepButton);
-                    animalArray.add(wolfButton);
-                    animalArray.add(turtleButton);
-                    animalArray.add(cyberSheepButton);
-                    //plants
-                    ArrayList<AddButton> plantArray= new ArrayList<>();
-                    AddButton dandelionButton = new AddButton(new Dandelion(0, 0, null));
-                    AddButton grassButton = new AddButton(new Grass(0, 0, null));
-                    AddButton guaranaButton = new AddButton(new Guarana(0, 0, null));
-                    AddButton nigshtshadeButton = new AddButton(new NightShade(0, 0, null));
-                    AddButton parnsipButton = new AddButton(new Parnsip(0, 0, null));
-                    plantArray.add(dandelionButton);
-                    plantArray.add(grassButton);
-                    plantArray.add(guaranaButton);
-                    plantArray.add(nigshtshadeButton);
-                    plantArray.add(parnsipButton);
-
-                    for(AddButton button:animalArray){
-                        animalPanel.add(button);
-                        //button.addActionListener();
+            if(butOrganism.getOrganism()==null){
+                int x = butOrganism.position.getX();
+                int y = butOrganism.position.getY();
+                ViewManager view = this;
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        AddManager addManager = new AddManager(x,y,world, view);
                     }
-                    for(AddButton button:plantArray){
-                        plantPanel.add(button);
-                    }
-
-                    jframe.add(animalPanel);
-                    jframe.add(plantPanel);
-                    jframe.setLayout(null);
-                    jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    jframe.setResizable(false);
-                    jframe.setVisible(true);*/
-
-                }
-            });
-            this.updateCanvas();
+                });
+            }
         }
     }
 }

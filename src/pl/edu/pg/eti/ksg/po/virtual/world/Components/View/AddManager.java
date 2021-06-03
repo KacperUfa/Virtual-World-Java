@@ -19,8 +19,9 @@ public class AddManager implements ActionListener {
     private int y;
     private World world;
     private Organism selectedOrganism;
+    private ViewManager view;
 
-    public AddManager(int x, int y, World world){
+    public AddManager(int x, int y, World world, ViewManager view){
         this.world = world;
         this.jframe = new JFrame("Add Organism");
         jframe.setSize(1000, 400);
@@ -30,6 +31,7 @@ public class AddManager implements ActionListener {
         plantPanel.setBounds(20, 220, 980, 200);
         this.x=x;
         this.y=y;
+        this.view=view;
 
         ArrayList<AddButton> animalArray= new ArrayList<>();
         AddButton antelopeButton = new AddButton(new Antelope(0, 0, null));
@@ -87,6 +89,7 @@ public class AddManager implements ActionListener {
          newOrganism.setWORLD(this.world);
         this.world.addNew(newOrganism);
         this.world.addOrganisms();
-
+        view.updateCanvas();
+        jframe.dispose();
     }
 }
