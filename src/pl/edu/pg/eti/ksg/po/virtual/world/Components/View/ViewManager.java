@@ -138,10 +138,11 @@ public class ViewManager implements ActionListener {
             this.updateCanvas();
         }
         if (e.getActionCommand().equals("addOrganism")) {
-            /*
+
             OrganismButton butOrganism = (OrganismButton) e.getSource();
             int x = butOrganism.position.getX();
             int y = butOrganism.position.getY();
+            /*
             Wolf wolf = new Wolf(x, y, this.world);
             this.world.addNew(wolf);
             this.world.addOrganisms();
@@ -150,6 +151,8 @@ public class ViewManager implements ActionListener {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
+                    AddManager addManager = new AddManager(x,y,world);
+                    /*
                     JFrame jframe = new JFrame();
                     jframe.setSize(1000, 400);
                     JPanel animalPanel = new JPanel();
@@ -188,30 +191,22 @@ public class ViewManager implements ActionListener {
 
                     for(AddButton button:animalArray){
                         animalPanel.add(button);
+                        //button.addActionListener();
                     }
                     for(AddButton button:plantArray){
                         plantPanel.add(button);
                     }
-                    /*
-                    animalPanel.add(antelopeButton);
-                    animalPanel.add(foxButton);
-                    animalPanel.add(sheepButton);
-                    animalPanel.add(wolfButton);
-                    animalPanel.add(turtleButton);
-                    animalPanel.add(cyberSheepButton);
-                    plantPanel.add(dandelionButton);
-                    plantPanel.add(grassButton);
-                    plantPanel.add(guaranaButton);
-                    plantPanel.add(nigshtshadeButton);
-                    plantPanel.add(parnsipButton);
-                    */
+
                     jframe.add(animalPanel);
                     jframe.add(plantPanel);
                     jframe.setLayout(null);
-                    jframe.setVisible(true);
+                    jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    jframe.setResizable(false);
+                    jframe.setVisible(true);*/
 
                 }
             });
+            this.updateCanvas();
         }
     }
 }
