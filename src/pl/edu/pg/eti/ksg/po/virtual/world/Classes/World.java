@@ -28,7 +28,6 @@ public class World {
         this.newOrganisms = new ArrayList<Organism>();
         this.deadOrganisms = new ArrayList<Organism>();
         this.map = new ArrayList<ArrayList<Organism>>();
-        //this.map.get() = new ArrayList<Organism>(3);
         for(int i=0; i<y; i++){
             this.map.add(new ArrayList<Organism>());
             for(int j=0;j<x;j++){

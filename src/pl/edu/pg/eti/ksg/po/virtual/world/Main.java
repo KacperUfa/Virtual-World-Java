@@ -4,6 +4,7 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.CyberSheep;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Human;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Sheep;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Wolf;
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.GenerateWorld;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Plants.Grass;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Plants.Parnsip;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
@@ -21,7 +22,7 @@ import java.util.NoSuchElementException;
 public class Main {
 
     public static void main(String[] args) {
-        String appTitle = "Virtual World";
+        String appTitle = "Virtual World - Kacper ufa 184501";
         int sizeX = 5;
         int sizeY = 10;
         Sheep sheep = new Sheep(new Position(2, 3), null);
@@ -34,23 +35,22 @@ public class Main {
         Wolf wolf1 = new Wolf(3, 9, null);
 
         //Human human = new Human(4,9,null);
-        ArrayList<Organism> organisms = new ArrayList<Organism>();
+        GenerateWorld generateWorld = new GenerateWorld(sizeX,sizeY);
+        ArrayList<Organism> organisms;
         //organisms.add(sheep3);
         //organisms.add(parnsip1);
         //organisms.add(grass1);
         //organisms.add(wolf1);
         //organisms.add(sheep2);
         //organisms.add(human);
-        //World world = new World(sizeX, sizeY, organisms);
+        World world = generateWorld.generateWorld();
         Human human2 = null;
         SaveLoad load = new SaveLoad();
-        World world = load.load();
+        //World world = load.load();
         organisms = world.getOrganisms();
-        boolean found = false;
         for(Organism organism:organisms){
             if(organism.getClass().getSimpleName().equals("Human")){
                 human2 = (Human) organism;
-                found = true;
                 break;
             }
         }
