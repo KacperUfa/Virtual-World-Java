@@ -47,9 +47,9 @@ public class SaveLoad {
                         break;
                     }
                     case "Antelope":{
-                        Antelope antelope = new Antelope(x,y,null);
+                        organism = new Antelope(x,y,null);
                         organism.setPower(power);
-                        organisms.add(antelope);
+                        organisms.add(organism);
                         break;
                     }
                     case "CyberSheep":{

@@ -10,6 +10,7 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Plants.Parnsip;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.SaveLoad;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
+import pl.edu.pg.eti.ksg.po.virtual.world.Components.View.StartManager;
 import pl.edu.pg.eti.ksg.po.virtual.world.Components.View.ViewManager;
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
@@ -22,28 +23,14 @@ import java.util.NoSuchElementException;
 public class Main {
 
     public static void main(String[] args) {
+        StartManager startManager = new StartManager();
         String appTitle = "Virtual World - Kacper ufa 184501";
         int sizeX = 5;
         int sizeY = 10;
-        Sheep sheep = new Sheep(new Position(2, 3), null);
-        Sheep sheep2 = new Sheep(new Position(1, 3), null);
-        Sheep sheep3 = new Sheep(new Position(3, 0), null);
-        Parnsip parnsip1 = new Parnsip(0,0,null);
-        Parnsip parnsip2 = new Parnsip(0,9,null);
-        Grass grass1=new Grass(0,1,null);
-        CyberSheep cyberSheep1 = new CyberSheep(4,9,null);
-        Wolf wolf1 = new Wolf(3, 9, null);
 
-        //Human human = new Human(4,9,null);
         GenerateWorld generateWorld = new GenerateWorld(sizeX,sizeY);
         ArrayList<Organism> organisms;
-        //organisms.add(sheep3);
-        //organisms.add(parnsip1);
-        //organisms.add(grass1);
-        //organisms.add(wolf1);
-        //organisms.add(sheep2);
-        //organisms.add(human);
-        World world = generateWorld.generateWorld();
+        World world = generateWorld.createWorld();
         Human human2 = null;
         SaveLoad load = new SaveLoad();
         //World world = load.load();
@@ -62,9 +49,8 @@ public class Main {
         else{
             human = human2;
         }
-        //World world = new World(sizeX, sizeY, organisms);
 
-
+/*
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -72,6 +58,6 @@ public class Main {
                 int worldY = world.getMapSize().getY();
                 new ViewManager(appTitle, worldY , worldX, world, human);
             }
-        });
+        });*/
     }
 }

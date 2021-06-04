@@ -16,7 +16,7 @@ public class GenerateWorld {
         this.y = y;
     }
 
-    public World generateWorld(){
+    public World createWorld(){
         int maxAmount = x*y;
         int plantAmount = maxAmount/5;
         int animalAmount = maxAmount/4;
