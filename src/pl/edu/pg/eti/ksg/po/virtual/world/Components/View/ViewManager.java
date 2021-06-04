@@ -3,6 +3,7 @@ package pl.edu.pg.eti.ksg.po.virtual.world.Components.View;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.*;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Plants.*;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.SaveLoad;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
@@ -10,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -43,7 +45,11 @@ public class ViewManager implements ActionListener {
         JButton makeTurn = new JButton("Make Turn");
         makeTurn.addActionListener(this);
         makeTurn.setActionCommand("makeTurn");
+        JButton saveGame = new JButton("Save Game");
+        saveGame.addActionListener(this);
+        saveGame.setActionCommand("saveGame");
         this.otherButtons.add(makeTurn);
+        this.otherButtons.add(saveGame);
         this.otherButtons.setVisible(true);
         this.otherButtons.setVisible(true);
         this.buttonsPanel.setVisible(true);
@@ -145,6 +151,15 @@ public class ViewManager implements ActionListener {
                 this.updateCanvas();
             }
 
+        }
+        if (e.getActionCommand().equals("saveGame")) {
+            SaveLoad save = new SaveLoad();
+            try {
+                save.save(this.world.getOrganisms(), this.world);
+            }
+            catch (IOException exception){
+
+            }
         }
         if (e.getActionCommand().equals("addOrganism")) {
 

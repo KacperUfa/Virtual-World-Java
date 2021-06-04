@@ -82,13 +82,14 @@ public class World {
         removeOrganisms();
         sortOrganisms();
         sortOrganisms();
+        /*
         SaveLoad save = new SaveLoad();
         try {
             save.save(this.organisms, this);
         }
         catch (IOException e){
 
-        }
+        }*/
 
     }
 

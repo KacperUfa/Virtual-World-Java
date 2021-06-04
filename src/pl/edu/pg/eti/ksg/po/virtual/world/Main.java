@@ -24,31 +24,8 @@ public class Main {
 
     public static void main(String[] args) {
         StartManager startManager = new StartManager();
-        String appTitle = "Virtual World - Kacper ufa 184501";
-        int sizeX = 5;
-        int sizeY = 10;
 
-        GenerateWorld generateWorld = new GenerateWorld(sizeX,sizeY);
-        ArrayList<Organism> organisms;
-        World world = generateWorld.createWorld();
-        Human human2 = null;
-        SaveLoad load = new SaveLoad();
-        //World world = load.load();
-        organisms = world.getOrganisms();
-        for(Organism organism:organisms){
-            if(organism.getClass().getSimpleName().equals("Human")){
-                human2 = (Human) organism;
-                break;
-            }
-        }
-        Human human;
-        if(human2==null){
-             human= new Human(0,0,world);
-             human.setAlive(false);
-        }
-        else{
-            human = human2;
-        }
+
 
 /*
         SwingUtilities.invokeLater(new Runnable() {
