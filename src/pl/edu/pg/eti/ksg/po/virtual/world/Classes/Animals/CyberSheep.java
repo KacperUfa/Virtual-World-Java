@@ -6,6 +6,12 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
 import javax.swing.*;
 
+/*
+CyberSheep is a special extension of animal class, it's life purpose is to eliminate all of the
+parnsips that exist in the map, it is immune to killing abilities of the parnsip and if anything collides
+with it, when somewhere in the map is parnsip it instantly teleports and eats it
+ */
+
 public class CyberSheep extends Animal {
     public CyberSheep(Position position, World world) {
         super(4, new ImageIcon("resources/Images/cyberSheep.png"), 11, position, world);
@@ -15,6 +21,7 @@ public class CyberSheep extends Animal {
         super(4, new ImageIcon("resources/Images/cyberSheep.png"), 11, x, y, world);
     }
 
+    //Setting move based on this object position and the nearest parnsip position
     public Position setMove(Position move, int i, int j) {
         if (this.position.getY() > i) {
             move.setY(-1);
@@ -36,9 +43,8 @@ public class CyberSheep extends Animal {
         return move;
     }
 
+    //Find weed on the map and use setMove() to set the move direction to it
     public Position findWeed() {
-        int x = 0;
-        int y = 0;
         int xVec =0;
         int yVec=0;
         int sum = 0;
@@ -58,8 +64,6 @@ public class CyberSheep extends Animal {
                             if (sum > tmpSum) {
                                 xVec=tmpX;
                                 yVec=tmpY;
-                                x = j;
-                                y = i;
                                 sum = tmpSum;
                                 this.setMove(move, j, i);
                             }
@@ -67,12 +71,7 @@ public class CyberSheep extends Animal {
                         else {
                             xVec=tmpX;
                             yVec=tmpY;
-
-
-                            x = j;
-                            y = i;
                             sum = tmpX + tmpY;
-
                             this.setMove(move, j, i);
                         }
                     }
@@ -80,15 +79,13 @@ public class CyberSheep extends Animal {
 
             }
         }
-        //this.setMove(move, x, y);
         return move;
     }
 
+    //Finding and returning exact position of the nearest parnsip
     public Position findWeedPosition() {
         int x = 0;
         int y = 0;
-        int xVec =0;
-        int yVec=0;
         int sum = 0;
         for (int i = 0; i < this.WORLD.getMapSize().getX(); i++) {
             for (int j = 0; j < this.WORLD.getMapSize().getY(); j++) {
@@ -122,6 +119,8 @@ public class CyberSheep extends Animal {
         return new Position(x,y);
     }
 
+    //changing action so that if there is any parnsip in the world it goes int it's direction,
+    //if all parnsips are already eaten it behaves like everyother animal
     @Override
     public void action(){
 
@@ -146,6 +145,9 @@ public class CyberSheep extends Animal {
         }
     }
 
+    //changing collision so that if there is any parnsip in the world it instantly teleports
+    //on it's place and eats it,
+    // if all parnsips are already eaten it behaves like every other animal
     @Override
     public void collision(Organism aggressiveOrganism, int organismX,int organismY, Position move){
         Position moveTMP=this.findWeed();
@@ -170,10 +172,5 @@ public class CyberSheep extends Animal {
     public void newOrganism(Position position) {
         CyberSheep cyberSheep = new CyberSheep(position, this.WORLD);
         this.WORLD.addNew(cyberSheep);
-    }
-
-    @Override
-    public void draw() {
-
     }
 }

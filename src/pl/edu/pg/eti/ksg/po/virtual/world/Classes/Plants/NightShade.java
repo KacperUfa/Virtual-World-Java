@@ -31,8 +31,4 @@ public class NightShade extends Plant{
         this.WORLD.addNew(nightShade);
     }
 
-    @Override
-    public void draw() {
-
-    }
 }

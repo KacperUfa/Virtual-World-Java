@@ -19,9 +19,4 @@ public class Grass extends Plant{
         Grass grass = new Grass(position,this.WORLD);
         this.WORLD.addNew(grass);
     }
-
-    @Override
-    public void draw() {
-
-    }
 }

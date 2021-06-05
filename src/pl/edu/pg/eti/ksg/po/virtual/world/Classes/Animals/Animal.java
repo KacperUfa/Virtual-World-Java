@@ -7,6 +7,11 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 import javax.swing.*;
 import java.util.Random;
 
+/*
+Base class for all of the animals, it extends basic organism, it describes basic action and
+collision methods
+ */
+
 public abstract class Animal extends Organism {
     public Animal(int initiative, ImageIcon organismIcon, int power, Position position, World world) {
         super(initiative, organismIcon, power, position, world);
@@ -16,6 +21,8 @@ public abstract class Animal extends Organism {
         super(initiative, organismIcon, power, x, y, world);
     }
 
+    //Base animal action, animal moves and if it collides with anything it activates collison
+    // method of atacked organism
     @Override
     public void action() {
         //System.out.println(this.getClass().getSimpleName());
@@ -36,6 +43,8 @@ public abstract class Animal extends Organism {
         }
     }
 
+    //Basic animal collision, if it collides with the same species it breeds, if the species are not
+    //the same, then it fight
     @Override
     public void collision(Organism aggressiveOrganism, int organismX,int organismY, Position move){
         if(aggressiveOrganism.checkSpecies(this)){

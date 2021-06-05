@@ -4,6 +4,11 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
 import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 import javax.swing.*;
 
+/*
+Special extension of Animal class, there is only one human in world and if it is alive user make him move
+in the chosen direction or activate special ability, which is getting power boost
+ */
+
 public class Human extends Animal{
     private int countSpecial;
     private boolean ableToActivate;
@@ -47,6 +52,8 @@ public class Human extends Animal{
         this.ableToActivate = canActivate;
     }
 
+    //implementing action method in a way that move is not random and make operations connected with it's
+    //special ability
     @Override
     public void action(){
         if(!this.isAbleToActivate()){
@@ -86,10 +93,5 @@ public class Human extends Animal{
     public void newOrganism(Position position) {
         Human human = new Human(position, this.WORLD);
         this.WORLD.addNew(human);
-    }
-
-    @Override
-    public void draw() {
-
     }
 }

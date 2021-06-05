@@ -26,9 +26,4 @@ public class Dandelion extends Plant{
         Dandelion dandelion = new Dandelion(position, this.WORLD);
         this.WORLD.addNew(dandelion);
     }
-
-    @Override
-    public void draw() {
-
-    }
 }

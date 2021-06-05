@@ -73,9 +73,4 @@ public class Parnsip extends Plant {
         Parnsip parnsip = new Parnsip(position, this.WORLD);
         this.WORLD.addNew(parnsip);
     }
-
-    @Override
-    public void draw() {
-
-    }
 }

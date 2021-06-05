@@ -2,8 +2,11 @@ package pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals;
 
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
-
 import javax.swing.*;
+
+/*
+Basic animal, nothing special
+ */
 
 public class Wolf extends Animal{
 
@@ -19,10 +22,5 @@ public class Wolf extends Animal{
     public void newOrganism(Position position) {
         Wolf wolf = new Wolf(position,this.WORLD);
         this.WORLD.addNew(wolf);
-    }
-
-    @Override
-    public void draw() {
-
     }
 }

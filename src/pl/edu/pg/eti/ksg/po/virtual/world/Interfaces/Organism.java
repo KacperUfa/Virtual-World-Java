@@ -7,6 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
+/*
+Base for all organisms in virtual world, it has the most common methods included responsible
+for moving organism, checking if other organisms is the same species and getting empty position
+around organism
+*/
+
 public abstract class Organism {
     private final int INITIATIVE;
     private final ImageIcon ORGANISM_ICON;
@@ -87,6 +93,7 @@ public abstract class Organism {
         this.position.move(position.getX(), position.getY());
     }
 
+    //Randomised moved that doesn't equal (0,0)
     public Position randomMove() {
         Random random = new Random();
         int x, y;
@@ -100,6 +107,7 @@ public abstract class Organism {
         return new Position(x, y);
     }
 
+    //Correcting move so that organism cannot go outside map
     public void correctMove(Position move, Position worldSize, int actualX, int actualY){
         if (actualX == 0 && move.getX() == -1) {
             move.setX(1);
@@ -113,6 +121,7 @@ public abstract class Organism {
         }
     }
 
+    //Searching if there is any empty field around organism and returning first of it
     public Position breedPosition(){
         int actualX = this.position.getX();
         int actualY = this.position.getY();
@@ -133,6 +142,7 @@ public abstract class Organism {
         return null;
     };
 
+    //Comparing own class and the class of the other organism
     public boolean checkSpecies(Organism organism){
         if(organism.getClass()==this.getClass()){
             return true;
@@ -140,11 +150,14 @@ public abstract class Organism {
         return false;
     }
 
+    //Abstractive methods that are useful in all organism but differ in functioning
+
+
+    //In every not abstract class method newOrganism is the same,it creates the new object
+    //of the class it is implemented in and adds it to the world
     abstract public void newOrganism(Position position);
 
     abstract public void action();
 
     abstract public void collision(Organism aggressiveOrganism, int organismX,int organismY, Position move);
-
-    abstract public void draw();
 }

@@ -7,6 +7,11 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 import javax.swing.*;
 import java.util.Random;
 
+/*
+Base class for all plants extending basic organism, it implements basic action and collision methods.
+Additionally it sets initiative of all plants to 0
+ */
+
 public abstract class Plant extends Organism {
     public Plant(int power, ImageIcon organismIcon,  Position position, World world) {
         super(0, organismIcon, power, position, world);
@@ -16,6 +21,7 @@ public abstract class Plant extends Organism {
         super(0, organismIcon ,power, x, y, world);
     }
 
+    //Base plant action which is trying to spread seeds on the fields nearby it
     @Override
     public void action() {
         Random random = new Random();
@@ -24,7 +30,6 @@ public abstract class Plant extends Organism {
         if (spread == 0) {
             int actualX = this.position.getX();
             int actualY = this.position.getY();
-            Position actualPosition = this.position;
             Position worldSize = this.getWORLD().getMapSize();
             Position move = this.randomMove();
 
@@ -42,6 +47,7 @@ public abstract class Plant extends Organism {
         }
     }
 
+    //Base plant collision which is basically being eaten by something
     @Override
     public void collision(Organism aggressiveOrganism, int organismX, int organismY, Position move) {
         this.getWORLD().addKilled(this);

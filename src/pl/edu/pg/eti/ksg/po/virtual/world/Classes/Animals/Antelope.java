@@ -7,6 +7,11 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 import javax.swing.*;
 import java.util.Random;
 
+/*
+Antelope differs from basic animal in that, it moves by two fields instead of one and if it has empty filed
+nearby it has 50% chance to escape before fight
+ */
+
 public class Antelope extends Animal {
     public Antelope(Position position, World world) {
         super(4, new ImageIcon("resources/Images/antelope.png"), 4, position, world);
@@ -16,6 +21,7 @@ public class Antelope extends Animal {
         super(4, new ImageIcon("resources/Images/antelope.png"), 4, x, y, world);
     }
 
+    //Adjusted for moving by two fields
     @Override
     public void correctMove(Position move, Position worldSize, int actualX, int actualY) {
         if ((actualX == 0 || actualX == 1) && move.getX() < 0) {
@@ -30,6 +36,7 @@ public class Antelope extends Animal {
         }
     }
 
+    //Adjusted for moving by two fields
     @Override
     public void action() {
         int actualX = this.position.getX();
@@ -50,6 +57,7 @@ public class Antelope extends Animal {
         }
     }
 
+    //implementing the escape mechanics in base collision
     @Override
     public void collision(Organism aggressiveOrganism, int organismX, int organismY, Position move) {
         Random random = new Random();
@@ -72,10 +80,5 @@ public class Antelope extends Animal {
     public void newOrganism(Position position) {
         Antelope antelope = new Antelope(position, this.WORLD);
         this.WORLD.addNew(antelope);
-    }
-
-    @Override
-    public void draw() {
-
     }
 }

@@ -26,9 +26,4 @@ public class Guarana extends Plant {
         Guarana guarana = new Guarana(position, this.WORLD);
         this.WORLD.addNew(guarana);
     }
-
-    @Override
-    public void draw() {
-
-    }
 }
