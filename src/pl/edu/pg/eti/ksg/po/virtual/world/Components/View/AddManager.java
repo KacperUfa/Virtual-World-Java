@@ -11,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/*
+Window that appears when you add new organism by clicking
+ */
+
 public class AddManager implements ActionListener {
     private final JFrame jframe;
     private JPanel animalPanel;
@@ -77,6 +81,7 @@ public class AddManager implements ActionListener {
 
     }
 
+    //when you click button it gets the organism it was holding inside and creates a new object of this organism
     @Override
     public void actionPerformed(ActionEvent e) {
         AddButton butOrganism = (AddButton) e.getSource();

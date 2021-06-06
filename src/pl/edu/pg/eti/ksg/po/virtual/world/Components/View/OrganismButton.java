@@ -5,6 +5,10 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
 import javax.swing.*;
 
+/*
+Button used for organism in viewmanager map
+ */
+
 public class OrganismButton extends JButton {
     Organism organism;
     Position position;

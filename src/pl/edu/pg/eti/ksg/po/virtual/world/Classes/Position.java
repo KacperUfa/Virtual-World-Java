@@ -2,6 +2,10 @@ package pl.edu.pg.eti.ksg.po.virtual.world.Classes;
 
 import java.util.Objects;
 
+/*
+Class used for size or coordinates
+ */
+
 public class Position {
     private int x;
     private int y;

@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/*
+Panel displaying main simulation, map and logs, with buttons to save or make next turn
+ */
+
 public class ViewManager implements ActionListener {
     private final JFrame frame;
     JTextArea logs;

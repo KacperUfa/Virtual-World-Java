@@ -4,6 +4,10 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
 import javax.swing.*;
 
+/*
+Button designed for adding panel
+ */
+
 public class AddButton extends JButton {
     private Organism organism;
 

@@ -4,6 +4,10 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
 import javax.swing.*;
 
+/*
+Button designed for humanManager
+ */
+
 public class HumanButton extends JButton {
     int x;
     int y;

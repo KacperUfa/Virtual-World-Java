@@ -12,12 +12,15 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/*
+Class for saving and loading worlds based on textfile
+ */
+
 public class SaveLoad {
 
+    //Load method opens file that was previously saved, it gets world size from first line and iterates every next line
+    //as next organism
     public World load() {
-
-        //File file = new File("gameSave/save.txt");
-        //ArrayList<Organism> organisms = new ArrayList<>();
         try {
             File file = new File("gameSave/save.txt");
             ArrayList<Organism> organisms = new ArrayList<>();
@@ -122,6 +125,7 @@ public class SaveLoad {
         return null;
     }
 
+    //Save method creates string made of world dimensions and in every next line it describes one organism from the list
     public void save(ArrayList<Organism> organisms, World world) throws IOException {
         String tmpString = "";
         tmpString += world.getMapSize().getX()+" "+world.getMapSize().getY()+"\n";

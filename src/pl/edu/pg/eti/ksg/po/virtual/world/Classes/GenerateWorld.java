@@ -7,6 +7,10 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 import java.util.ArrayList;
 import java.util.Random;
 
+/*
+Class for generating totally new world
+ */
+
 public class GenerateWorld {
     private int x;
     private int y;
@@ -16,6 +20,7 @@ public class GenerateWorld {
         this.y = y;
     }
 
+    //Method that executes all functions required and returns generated world
     public World createWorld(){
         int maxAmount = x*y;
         int plantAmount = maxAmount/5;
@@ -43,6 +48,7 @@ public class GenerateWorld {
         return world;
     }
 
+    //Adding plants to the list of all organisms based on passed number for plants amount
     public void addPlants(int plantAmount, ArrayList<Organism> organisms, ArrayList<ArrayList<Organism>> map){
         Random random = new Random();
         for(int i=0;i<plantAmount;i++){
@@ -83,6 +89,7 @@ public class GenerateWorld {
         }
     }
 
+    //Adding animals to the list of all organisms based on passed number for animals amount
     public void addAnimals(int animalAmount, ArrayList<Organism> organisms, ArrayList<ArrayList<Organism>> map){
         Random random = new Random();
         for(int i=0;i<animalAmount;i++){

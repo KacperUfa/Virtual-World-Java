@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
+/*
+Starting panel for selection to create or load world
+ */
 public class StartManager implements ActionListener {
     private final JFrame jframe;
     private JPanel panel;
@@ -71,6 +74,7 @@ public class StartManager implements ActionListener {
         return true;
     }
 
+    //Depending on chosen button and data input it makes new world, loads saved or do nothing
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("newWorld")) {
@@ -80,8 +84,6 @@ public class StartManager implements ActionListener {
                 int actualX = Integer.parseInt(xString);
                 int actualY = Integer.parseInt(yString);
                 if(actualX>0 && actualY>0){
-                    //System.out.println("Sukces");
-
                     GenerateWorld generateWorld = new GenerateWorld(actualX,actualY);
                     ArrayList<Organism> organisms;
                     World world = generateWorld.createWorld();

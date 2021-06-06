@@ -7,6 +7,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+Window which allows you to decide on the human move
+ */
+
 public class HumanManager implements ActionListener {
     private final JFrame jframe;
     private JPanel upKeyPanel;
@@ -72,6 +76,7 @@ public class HumanManager implements ActionListener {
         return jframe;
     }
 
+    //When you choose it sets move in human object so that it knows where to go in it's turn
     @Override
     public void actionPerformed(ActionEvent e) {
         HumanButton humanButton = (HumanButton) e.getSource();
