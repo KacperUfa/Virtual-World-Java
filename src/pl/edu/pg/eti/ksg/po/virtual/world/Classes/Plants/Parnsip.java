@@ -6,6 +6,12 @@ import pl.edu.pg.eti.ksg.po.virtual.world.Interfaces.Organism;
 
 import javax.swing.*;
 
+/*
+The most dangerous plant in virtual world, in it's action it kills every animal except CyberSheep, that is standing
+on the nearby fields.
+In the collision method,if it was not CyberSheep, it kills the animal that ate it
+ */
+
 public class Parnsip extends Plant {
     public Parnsip(Position position, World world) {
         super(10, new ImageIcon("resources/Images/parnsip.png"), position, world);
@@ -14,7 +20,8 @@ public class Parnsip extends Plant {
     public Parnsip(int x, int y, World world) {
         super(10, new ImageIcon("resources/Images/parnsip.png"), x, y, world);
     }
-
+    //In action besides normal spreading seeds, it is killing and removing every animal, besides CyberSheep
+    //that is around it
     @Override
     public void action(){
         System.out.println(this.getClass().getSimpleName());
@@ -39,10 +46,7 @@ public class Parnsip extends Plant {
                     Class c = organismTmp.getClass();
                     isCyber=c.getSimpleName().equals("CyberSheep");
                 }
-
                 if(organismTmp!=null && !isCyber && !isInstance){
-                    Position newPosition = new Position(actualX+i,actualY+j);
-
                     organismTmp.getWORLD().addKilled(organismTmp);
                     organismTmp.kill();
                     organismTmp.getWORLD().erasePosition(actualX+i,actualY+j);
@@ -53,6 +57,7 @@ public class Parnsip extends Plant {
 
     }
 
+    //In the collision parnsip kills itself and attacking organism if it was not CyberSheep
     @Override
     public void collision(Organism aggressiveOrganism, int organismX, int organismY, Position move) {
         Class c = aggressiveOrganism.getClass();
