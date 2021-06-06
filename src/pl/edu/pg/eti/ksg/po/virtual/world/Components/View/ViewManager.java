@@ -1,7 +1,6 @@
 package pl.edu.pg.eti.ksg.po.virtual.world.Components.View;
 
-import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.*;
-import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Plants.*;
+import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Animals.Human;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.Position;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.SaveLoad;
 import pl.edu.pg.eti.ksg.po.virtual.world.Classes.World;
@@ -18,9 +17,11 @@ import java.util.stream.Collectors;
 
 public class ViewManager implements ActionListener {
     private final JFrame frame;
+    JTextArea logs;
     private JPanel buttonsPanel;
     private JPanel otherButtons;
     private JPanel container;
+    private JScrollPane scrollPane;
     private int sizeX;
     private int sizeY;
     private World world;
@@ -28,7 +29,7 @@ public class ViewManager implements ActionListener {
     private Human human;
 
     public ViewManager(String windowTitle, int sizeX, int sizeY, World world, Human human) {
-        this.human=human;
+        this.human = human;
         this.world = world;
         this.organisms = this.world.getOrganisms();
         this.otherButtons = new JPanel();
@@ -55,6 +56,14 @@ public class ViewManager implements ActionListener {
         this.buttonsPanel.setVisible(true);
         this.container.add(this.otherButtons);
         this.container.add(this.buttonsPanel);
+        this.logs = new JTextArea();
+        logs.setEnabled(false);
+        this.scrollPane = new JScrollPane(logs);
+        this.scrollPane.setPreferredSize(new Dimension(20, 30));
+       this.scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+       this.scrollPane.setBorder(BorderFactory.createEmptyBorder(0, 50, 15, 50));
+        this.container.add(this.scrollPane);
+
         this.frame.add(this.container);
         this.frame.setVisible(true);
         this.updateCanvas();
@@ -77,7 +86,7 @@ public class ViewManager implements ActionListener {
                 this.buttonsPanel.add(button);
             }
         }
-        this.buttonsPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+        this.buttonsPanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 50, 50));
     }
 
     public void fillButtonsWithTheirImages() {
@@ -124,7 +133,9 @@ public class ViewManager implements ActionListener {
         this.frame.remove(this.container);
         this.container.remove(this.buttonsPanel);
         this.createPanelWithButtons();
+        this.container.remove(this.scrollPane);
         this.container.add(this.buttonsPanel);
+        this.container.add(this.scrollPane);
         this.frame.add(this.container);
         this.frame.setVisible(true);
         this.container.revalidate();
@@ -143,10 +154,12 @@ public class ViewManager implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("makeTurn")) {
-            if(human.isAlive()){
-                HumanManager humanManager = new HumanManager(human,this);
-            }
-            else{
+            StringBuilder builder = this.world.getLogBuilder();
+            this.logs.append(builder.toString());
+            builder.setLength(0);
+            if (human.isAlive()) {
+                HumanManager humanManager = new HumanManager(human, this);
+            } else {
                 this.world.makeTurn();
                 this.updateCanvas();
             }
@@ -156,22 +169,21 @@ public class ViewManager implements ActionListener {
             SaveLoad save = new SaveLoad();
             try {
                 save.save(this.world.getOrganisms(), this.world);
-            }
-            catch (IOException exception){
+            } catch (IOException exception) {
 
             }
         }
         if (e.getActionCommand().equals("addOrganism")) {
 
             OrganismButton butOrganism = (OrganismButton) e.getSource();
-            if(butOrganism.getOrganism()==null){
+            if (butOrganism.getOrganism() == null) {
                 int x = butOrganism.position.getX();
                 int y = butOrganism.position.getY();
                 ViewManager view = this;
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        AddManager addManager = new AddManager(x,y,world, view);
+                        AddManager addManager = new AddManager(x, y, world, view);
                     }
                 });
             }

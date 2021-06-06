@@ -49,6 +49,8 @@ public abstract class Animal extends Organism {
     public void collision(Organism aggressiveOrganism, int organismX,int organismY, Position move){
         if(aggressiveOrganism.checkSpecies(this)){
             //Breed
+            String log = aggressiveOrganism.getClass().getSimpleName() + "s are Breeding\n";
+            this.WORLD.getLogBuilder().append(log);
             Position breedPosition = this.breedPosition();
             if(breedPosition!=null){
                 this.newOrganism(breedPosition);
@@ -57,12 +59,16 @@ public abstract class Animal extends Organism {
         else{
             //Fight
             if(aggressiveOrganism.getPower()>=this.getPower()){
+                String log = aggressiveOrganism.getClass().getSimpleName() + " killed " + this.getClass().getSimpleName() + "\n";
+                this.WORLD.getLogBuilder().append(log);
                 this.kill();
                 this.WORLD.addKilled(this);
                 aggressiveOrganism.getWORLD().erasePosition(this.position);
                 aggressiveOrganism.move(move);
             }
             else{
+                String log = this.getClass().getSimpleName() + " killed " + aggressiveOrganism.getClass().getSimpleName() + "\n";
+                this.WORLD.getLogBuilder().append(log);
                 aggressiveOrganism.getWORLD().addKilled(aggressiveOrganism);
                 aggressiveOrganism.kill();
             }
