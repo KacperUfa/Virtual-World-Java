@@ -155,12 +155,15 @@ public class ViewManager implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("makeTurn")) {
             StringBuilder builder = this.world.getLogBuilder();
-            this.logs.append(builder.toString());
+            //this.logs.append(builder.toString());
+            //this.logs.setText(builder.toString());
             builder.setLength(0);
             if (human.isAlive()) {
                 HumanManager humanManager = new HumanManager(human, this);
             } else {
                 this.world.makeTurn();
+                this.logs.setText("");
+                this.logs.append(builder.toString());
                 this.updateCanvas();
             }
 

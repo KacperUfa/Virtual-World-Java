@@ -71,6 +71,8 @@ public class Antelope extends Animal {
             this.WORLD.erasePosition(xTmp, yTmp);
             aggressiveOrganism.move(move);
             aggressiveOrganism.getWORLD().erasePosition(organismX, organismY);
+            String log = this.getClass().getSimpleName() + "s escaped\n";
+            this.WORLD.getLogBuilder().append(log);
         } else {
             super.collision(aggressiveOrganism, organismX, organismY, move);
         }

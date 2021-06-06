@@ -37,6 +37,8 @@ public abstract class Animal extends Organism {
         if(tmpOrganism==null){
             this.move(move.getX(), move.getY());
             this.WORLD.erasePosition(actualX,actualY);
+            String log = this.getClass().getSimpleName() + "s moved\n";
+            this.WORLD.getLogBuilder().append(log);
         }
         else{
             tmpOrganism.collision(this, actualX, actualY, move);
@@ -49,11 +51,11 @@ public abstract class Animal extends Organism {
     public void collision(Organism aggressiveOrganism, int organismX,int organismY, Position move){
         if(aggressiveOrganism.checkSpecies(this)){
             //Breed
-            String log = aggressiveOrganism.getClass().getSimpleName() + "s are Breeding\n";
-            this.WORLD.getLogBuilder().append(log);
             Position breedPosition = this.breedPosition();
             if(breedPosition!=null){
                 this.newOrganism(breedPosition);
+                String log = aggressiveOrganism.getClass().getSimpleName() + "s are Breeding\n";
+                this.WORLD.getLogBuilder().append(log);
             }
         }
         else{

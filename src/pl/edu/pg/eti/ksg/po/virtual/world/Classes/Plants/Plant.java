@@ -43,6 +43,8 @@ public abstract class Plant extends Organism {
             if(tmpOrganism==null){
                 Position breedPosition = new Position(xAction,yAction);
                 this.newOrganism(breedPosition);
+                String log = this.getClass().getSimpleName() + "s spread seeds\n";
+                this.WORLD.getLogBuilder().append(log);
             }
         }
     }
@@ -55,6 +57,8 @@ public abstract class Plant extends Organism {
         this.getWORLD().erasePosition(this.getPosition());
         aggressiveOrganism.move(move.getX(),move.getY());
         aggressiveOrganism.getWORLD().erasePosition(organismX, organismY);
+        String log = this.getClass().getSimpleName() + "s was eaten by "+aggressiveOrganism.getClass().getSimpleName()+"\n";
+        this.WORLD.getLogBuilder().append(log);
     }
 
 }

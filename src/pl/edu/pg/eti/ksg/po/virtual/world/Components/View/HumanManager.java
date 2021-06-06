@@ -78,6 +78,9 @@ public class HumanManager implements ActionListener {
         int yButton = humanButton.getYy();
         human.setMove(new Position(xButton,yButton));
         human.getWORLD().makeTurn();
+        StringBuilder builder = this.human.getWORLD().getLogBuilder();
+        viewManager.logs.setText("");
+        viewManager.logs.append(builder.toString());
         viewManager.updateCanvas();
         jframe.dispose();
     }
