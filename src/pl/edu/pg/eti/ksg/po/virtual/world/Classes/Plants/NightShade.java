@@ -28,8 +28,8 @@ public class NightShade extends Plant{
         aggressiveOrganism.kill();
         this.getWORLD().erasePosition(this.getPosition());
         aggressiveOrganism.getWORLD().erasePosition(organismX, organismY);
-        String log = this.getClass().getSimpleName() + "s was eaten by "+aggressiveOrganism.getClass().getSimpleName()+"\n";
-        String log2 = this.getClass().getSimpleName() + "s killed "+aggressiveOrganism.getClass().getSimpleName()+"\n";
+        String log = this.getClass().getSimpleName() + " was eaten by "+aggressiveOrganism.getClass().getSimpleName()+"\n";
+        String log2 = this.getClass().getSimpleName() + " killed "+aggressiveOrganism.getClass().getSimpleName()+"\n";
         this.WORLD.getLogBuilder().append(log);
         this.WORLD.getLogBuilder().append(log2);
     }

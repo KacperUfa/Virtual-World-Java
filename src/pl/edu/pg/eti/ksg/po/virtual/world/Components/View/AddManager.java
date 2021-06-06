@@ -25,6 +25,7 @@ public class AddManager implements ActionListener {
         this.world = world;
         this.jframe = new JFrame("Add Organism");
         jframe.setSize(1000, 400);
+        this.jframe.setLocationRelativeTo(null);
         animalPanel = new JPanel();
         plantPanel = new JPanel();
         animalPanel.setBounds(20, 20, 960, 170);
@@ -73,6 +74,7 @@ public class AddManager implements ActionListener {
         jframe.setLayout(null);
         jframe.setResizable(false);
         jframe.setVisible(true);
+
     }
 
     @Override

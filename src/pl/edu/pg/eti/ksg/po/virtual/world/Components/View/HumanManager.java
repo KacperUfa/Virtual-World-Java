@@ -19,6 +19,7 @@ public class HumanManager implements ActionListener {
         this.human=human;
         this.viewManager=viewManager;
         jframe = new JFrame("Human move");
+        this.jframe.setLocationRelativeTo(null);
         upKeyPanel = new JPanel();
         midKeyPanel = new JPanel();
         downKeyPanel = new JPanel();

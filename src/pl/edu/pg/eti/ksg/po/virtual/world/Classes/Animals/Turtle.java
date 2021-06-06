@@ -29,7 +29,7 @@ public class Turtle extends Animal{
         if(rand==0){
             super.action();
         }else{
-            String log = this.getClass().getSimpleName() + "s decided to stay in place\n";
+            String log = this.getClass().getSimpleName() + " decided to stay in place\n";
             this.WORLD.getLogBuilder().append(log);
         }
     }
@@ -41,7 +41,7 @@ public class Turtle extends Animal{
             super.collision(aggressiveOrganism, organismX, organismY, move);
         }
         else{
-            String log = this.getClass().getSimpleName() + "s defended itself\n";
+            String log = this.getClass().getSimpleName() + " defended itself\n";
             this.WORLD.getLogBuilder().append(log);
         }
     }

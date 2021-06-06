@@ -22,6 +22,7 @@ public class StartManager implements ActionListener {
     public StartManager() {
         this.jframe = new JFrame("Start panel");
         jframe.setSize(300,180);
+        this.jframe.setLocationRelativeTo(null);
         this.panel = new JPanel();
         this.panel.setBounds(0,20,300,50);
         this.textPanel = new JPanel();

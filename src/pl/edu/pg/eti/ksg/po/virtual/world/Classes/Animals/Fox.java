@@ -35,14 +35,14 @@ public class Fox extends Animal {
         if (tmpOrganism == null) {
             this.move(move.getX(), move.getY());
             this.WORLD.erasePosition(actualX,actualY);
-            String log = this.getClass().getSimpleName() + "s moved\n";
+            String log = this.getClass().getSimpleName() + " moved\n";
             this.WORLD.getLogBuilder().append(log);
         } else {
             if (tmpOrganism.getPower() <= this.getPower()) {
                 tmpOrganism.collision(this, actualX, actualY, move);
             }
             else{
-                String log = this.getClass().getSimpleName() + "s didn't move\n";
+                String log = this.getClass().getSimpleName() + " didn't move\n";
                 this.WORLD.getLogBuilder().append(log);
             }
         }

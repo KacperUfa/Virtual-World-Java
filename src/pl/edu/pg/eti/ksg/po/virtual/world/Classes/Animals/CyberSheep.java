@@ -138,7 +138,7 @@ public class CyberSheep extends Animal {
             if(tmpOrganism==null){
                 this.move(move.getX(), move.getY());
                 this.WORLD.erasePosition(actualX,actualY);
-                String log = this.getClass().getSimpleName() + "s moved\n";
+                String log = this.getClass().getSimpleName() + " moved\n";
                 this.WORLD.getLogBuilder().append(log);
             }
             else{
@@ -167,7 +167,7 @@ public class CyberSheep extends Animal {
             this.WORLD.erasePosition(xTmp,yTmp);
             aggressiveOrganism.move(move);
             aggressiveOrganism.getWORLD().erasePosition(organismX,organismY);
-            String log = this.getClass().getSimpleName() + "s teleported to parnsip\n";
+            String log = this.getClass().getSimpleName() + " teleported to parnsip\n";
             this.WORLD.getLogBuilder().append(log);
         }
     }

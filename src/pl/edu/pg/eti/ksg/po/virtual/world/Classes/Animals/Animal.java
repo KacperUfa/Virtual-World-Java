@@ -37,7 +37,7 @@ public abstract class Animal extends Organism {
         if(tmpOrganism==null){
             this.move(move.getX(), move.getY());
             this.WORLD.erasePosition(actualX,actualY);
-            String log = this.getClass().getSimpleName() + "s moved\n";
+            String log = this.getClass().getSimpleName() + " moved\n";
             this.WORLD.getLogBuilder().append(log);
         }
         else{

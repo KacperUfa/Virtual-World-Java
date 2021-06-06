@@ -76,7 +76,7 @@ public class Human extends Animal{
             if(tmpOrganism==null){
                 this.move(move.getX(), move.getY());
                 this.WORLD.erasePosition(actualX,actualY);
-                String log = this.getClass().getSimpleName() + "s move\n";
+                String log = this.getClass().getSimpleName() + " move\n";
                 this.WORLD.getLogBuilder().append(log);
             }
             else{
@@ -87,7 +87,7 @@ public class Human extends Animal{
             this.setPower(this.getPower()+5);
             this.countSpecial=10;
             this.setCanActivate(false);
-            String log = this.getClass().getSimpleName() + "s used super power\n";
+            String log = this.getClass().getSimpleName() + " used super power\n";
             this.WORLD.getLogBuilder().append(log);
         }
 
